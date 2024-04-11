@@ -17,9 +17,9 @@ public class Main {
 
 
         servicePost ps = new servicePost();
-        //post newPost = new post(777, "zzzzzz", "zezae", "azerz", "azer","aaa");
+        post newPost = new post(777, 777, "zezae", "azerz", "azer","aaa","qsdfqsdf","sdfqsdf");
         //newPost.setImage_post("rrrrrr"); Assuming setImage_post method exists in your post class
-        ps.Supprimer(55);
+       // ps.Supprimer(55);
         //post  posttomodify = new post();
         //posttomodify.setId_post(66);
         //posttomodify.setTitle_post("New Title");
@@ -27,10 +27,10 @@ public class Main {
         //posttomodify.setDescription_post("New Description");
         //posttomodify.setImage_post("New Image");
         //ps.modifier(posttomodify);
-        //ps.ajouter(newPost);
+        ps.ajouter(newPost);
 
         serviceComment cs = new serviceComment();
-       // comment newComment = new comment(1,55,"azea","nicce post");
+       // comment newComment = new comment(1,81,"azea","nicce post");
         //cs.ajouter(newComment);
         //cs.Supprimer(134);
 

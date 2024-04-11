@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1005.0" prefWidth="1990.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
+   <ScrollPane prefHeight="1005.0" prefWidth="2061.0">
+      <content>
+      
+                            <VBox fx:id="postContainer" alignment="CENTER" prefHeight="850.0" prefWidth="1169.0" spacing="10">
+              <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Posts" />
+      
+                                <!-- Post Display Components -->
+              <VBox spacing="5">
+                  <HBox spacing="5">
+                      <Label text="Title:" />
+                      <Label fx:id="titleLabel" />
+                  </HBox>
+      
+                                    <HBox spacing="5">
+                      <Label text="Type:" />
+                      <Label fx:id="typeLabel" />
+                  </HBox>
+      
+                                    <HBox spacing="5">
+                      <Label text="Description:" />
+                      <Label fx:id="descriptionLabel" />
+                  </HBox>
+      
+                                    <HBox spacing="5">
+                      <Label text="Image:" />
+                      <ImageView fx:id="imageView" fitHeight="200" fitWidth="200" />
+                  </HBox>
+              </VBox>
+          </VBox>
+      </content>
+   </ScrollPane>
+
+</AnchorPane>
