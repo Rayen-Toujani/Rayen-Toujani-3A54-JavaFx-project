@@ -37,8 +37,37 @@ public class afficherpost {
             VBox postContent = new VBox(titleLabel, typeLabel, descriptionLabel, imageView);
             postContent.setSpacing(10); // Add spacing between components
 
+            // Add event handler to show only the clicked post
+            postContent.setOnMouseClicked(event -> showPostDetails(p, postContent));
+
             // Add the VBox containing post components to the postContainer
             postContainer.getChildren().add(postContent);
         }
+    }
+
+
+    private void showPostDetails(post p, VBox postContent) {
+        // Clear postContainer to remove previous post details
+        postContainer.getChildren().clear();
+
+        // Create labels for title, type, and description
+        Label titleLabel = new Label("Title: " + p.getTitle_post());
+        Label typeLabel = new Label("Type: " + p.getType_post());
+        Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+
+        // Create an ImageView for displaying the image
+        ImageView imageView = new ImageView(new Image(p.getImage_post()));
+        imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
+        imageView.setFitHeight(200); // Set height to 200 (adjust as needed)
+
+        // Add all components to a VBox to display them vertically
+        VBox postDetails = new VBox(titleLabel, typeLabel, descriptionLabel, imageView);
+        postDetails.setSpacing(10); // Add spacing between components
+
+        // Add the VBox containing post details to the postContainer
+        postContainer.getChildren().add(postDetails);
+
+        // Add event handler to go back to the list of posts when clicked again
+        postDetails.setOnMouseClicked(event -> initialize());
     }
 }

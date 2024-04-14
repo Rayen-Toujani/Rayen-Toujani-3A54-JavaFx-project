@@ -88,4 +88,13 @@ public class addpost {
     void handleSubmitButtonClick(ActionEvent event) {
         ajouterPost(event);
     }
+
+    @FXML
+    void handleShowPostButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficherpost.fxml"));
+        Parent root = loader.load();
+        Post_Title.getScene().setRoot(root);
+    }
+
+
 }

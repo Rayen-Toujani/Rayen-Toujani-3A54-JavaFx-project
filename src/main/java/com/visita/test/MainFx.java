@@ -14,6 +14,7 @@ public class MainFx  extends Application {
         Parent root=loader.load();
         Scene scene=new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Ajouter Personne");
         primaryStage.show();
     }
