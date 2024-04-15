@@ -49,7 +49,7 @@ public class afficherpost {
             card.getStyleClass().add("post-card");
             card.setLeft(titleLabel);
             card.setTop(typeLabel);
-            card.setBottom(descriptionLabel);
+            card.setLeft(descriptionLabel);
             card.setRight(new StackPane(imageView));
 
             // Add event handler to show post details when clicked
