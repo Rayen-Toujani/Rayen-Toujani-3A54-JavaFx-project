@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -16,111 +16,94 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="-1.0" prefWidth="-1.0" stylesheets="addpostStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
-   <ScrollPane prefHeight="626.0" prefWidth="1091.0" />
-   <VBox layoutX="20.0" layoutY="20.0" prefHeight="1600" prefWidth="1920">
-      <children>
-         <MenuBar VBox.vgrow="NEVER">
-            <menus>
-               <Menu mnemonicParsing="false" text="File">
-                  <items>
-                     <MenuItem mnemonicParsing="false" text="New" />
-                     <MenuItem mnemonicParsing="false" text="Open…" />
-                     <Menu mnemonicParsing="false" text="Open Recent" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem mnemonicParsing="false" text="Close" />
-                     <MenuItem mnemonicParsing="false" text="Save" />
-                     <MenuItem mnemonicParsing="false" text="Save As…" />
-                     <MenuItem mnemonicParsing="false" text="Revert" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem mnemonicParsing="false" text="Preferences…" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem mnemonicParsing="false" text="Quit" />
-                  </items>
-               </Menu>
-               <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                     <MenuItem mnemonicParsing="false" text="Undo" />
-                     <MenuItem mnemonicParsing="false" text="Redo" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem mnemonicParsing="false" text="Cut" />
-                     <MenuItem mnemonicParsing="false" text="Copy" />
-                     <MenuItem mnemonicParsing="false" text="Paste" />
-                     <MenuItem mnemonicParsing="false" text="Delete" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <MenuItem mnemonicParsing="false" text="Select All" />
-                     <MenuItem mnemonicParsing="false" text="Unselect All" />
-                  </items>
-               </Menu>
-               <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                     <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                  </items>
-               </Menu>
-            </menus>
-         </MenuBar>
-         <SplitPane dividerPositions="0.19447340980187697" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-            <items>
-               <AnchorPane prefHeight="1551.0" prefWidth="780.0">
-                  <children>
-                     <VBox layoutY="97.0" prefHeight="450.0" prefWidth="262.0">
+<AnchorPane prefHeight="1004.0" prefWidth="1931.0" stylesheets="addpostStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
+    <ScrollPane prefHeight="1004.0" prefWidth="1943.0">
+        <content>
+            <VBox layoutX="20.0" layoutY="20.0" prefHeight="968.0" prefWidth="1920">
+                <children>
+                    <MenuBar VBox.vgrow="NEVER">
+                        <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="New" />
+                                    <MenuItem mnemonicParsing="false" text="Open…" />
+                                    <Menu mnemonicParsing="false" text="Open Recent" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="Close" />
+                                    <MenuItem mnemonicParsing="false" text="Save" />
+                                    <MenuItem mnemonicParsing="false" text="Save As…" />
+                                    <MenuItem mnemonicParsing="false" text="Revert" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="Preferences…" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="Quit" />
+                                </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="Undo" />
+                                    <MenuItem mnemonicParsing="false" text="Redo" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="Cut" />
+                                    <MenuItem mnemonicParsing="false" text="Copy" />
+                                    <MenuItem mnemonicParsing="false" text="Paste" />
+                                    <MenuItem mnemonicParsing="false" text="Delete" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem mnemonicParsing="false" text="Select All" />
+                                    <MenuItem mnemonicParsing="false" text="Unselect All" />
+                                </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                                <items>
+                                    <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                                </items>
+                            </Menu>
+                        </menus>
+                    </MenuBar>
+                    <SplitPane dividerPositions="0.19447340980187697" focusTraversable="true" prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
+                        <items>
+                            <AnchorPane prefHeight="1551.0" prefWidth="780.0">
+                                <children>
+                                    <VBox layoutY="97.0" prefHeight="450.0" prefWidth="262.0">
+                              <children>
+                                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" text="Back to All Posts" />
+                              </children>
+                                    </VBox>
+                                </children>
+                            </AnchorPane>
+                            <ScrollPane prefHeight="1551.0" prefWidth="1101.0">
+                                <content>
+                                    <VBox fx:id="postContainer" alignment="CENTER" prefHeight="882.0" prefWidth="1232.0" spacing="10">
+                                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Posts" />
+                                        <!-- Add VBox to display comments -->
+                                        <VBox fx:id="commentsContainer" />
+                                    </VBox>
+                                </content>
+                            </ScrollPane>
+                        </items>
+                    </SplitPane>
+                    <VBox prefHeight="200" prefWidth="100">
+                        <!-- Add VBox to display comments -->
+                    </VBox>
+                    <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1920.0" spacing="5.0" VBox.vgrow="NEVER">
                         <children>
-
+                            <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+                                <font>
+                                    <Font size="11.0" fx:id="x3" />
+                                </font>
+                                <textFill>
+                                    <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
+                                </textFill>
+                            </Label>
+                            <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+                            <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
                         </children>
-                     </VBox>
-                  </children>
-               </AnchorPane>
-               <ScrollPane prefHeight="1551.0" prefWidth="1101.0">
-                  <content>
-                  
-                                                          <VBox fx:id="postContainer" alignment="CENTER" prefHeight="551.0" prefWidth="513.0" spacing="10">
-                          <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Posts" />
-                  
-                                                              <!-- Post Display Components -->
-                          <VBox spacing="5">
-                              <HBox spacing="5">
-                                  <Label text="Title:" />
-                                  <Label fx:id="titleLabel" />
-                              </HBox>
-                  
-                                                                  <HBox spacing="5">
-                                  <Label text="Type:" />
-                                  <Label fx:id="typeLabel" />
-                              </HBox>
-                  
-                                                                  <HBox spacing="5">
-                                  <Label text="Description:" />
-                                  <Label fx:id="descriptionLabel" />
-                              </HBox>
-                  
-                                                                  <HBox spacing="5">
-                                  <Label text="Image:" />
-                                  <ImageView fx:id="imageView" fitHeight="200" fitWidth="200" />
-                              </HBox>
-                          </VBox>
-                      </VBox>
-                  </content>
-               </ScrollPane>
-            </items>
-         </SplitPane>
-         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
-            <children>
-               <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
-                  <font>
-                     <Font size="11.0" fx:id="x3" />
-                  </font>
-                  <textFill>
-                     <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-                  </textFill>
-               </Label>
-               <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
-               <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
-            </children>
-            <padding>
-               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-            </padding>
-         </HBox>
-      </children>
-   </VBox>
-
+                        <padding>
+                            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                        </padding>
+                    </HBox>
+                </children>
+            </VBox>
+        </content>
+    </ScrollPane>
 </AnchorPane>

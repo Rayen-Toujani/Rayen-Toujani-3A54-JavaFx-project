@@ -11,16 +11,12 @@
     -fx-text-fill: #006600; /* Dark green */
 }
 
-
-
-
-
 /* Button */
 .button {
     -fx-font-size: 16px;
     -fx-font-weight: 200;
     -fx-letter-spacing: 1px;
-    -fx-padding: 13px 20px 13px;
+    -fx-padding: 13px 20px; /* Adjusted padding */
     -fx-border-width: 1px;
     -fx-border-color: black;
     -fx-cursor: hand;
@@ -31,16 +27,12 @@
     -fx-background-color: rgba(130, 255, 76, 0.5); /* Yellow with opacity */
 }
 
+/* Adjusted padding for media query */
 @media (min-width: 768px) {
     .button {
-        -fx-padding: 13px 50px 13px;
+        -fx-padding: 13px 50px;
     }
 }
-
-
-
-
-
 
 /* TextField */
 .text-field {
@@ -54,32 +46,23 @@
     -fx-border-color: transparent;
     -fx-background-color: #F3F3F3;
     -fx-border-radius: 10px;
-    -fx-width: 15em;
-    -fx-height: 2.5em;
-    -fx-padding: 0.8em 0.8em 0.8em 0.8em; /* top, right, bottom, left */
+    -fx-padding: 8px; /* Adjusted padding */
     -fx-font-size: 14px;
     -fx-transition: all 0.5s;
 }
 
-
-
-
 .text-area:hover,
 .text-area:focused {
     -fx-border-color: #4A9DEC;
-    -fx-box-shadow: 2px 2px 4px 1px rgba(0, 0, 0, 0.4);
-
     -fx-background-color: white;
 }
-
-
 
 /* ImageView */
 .image-view {
     -fx-border-color: #006600; /* Dark green */
     -fx-border-width: 1px;
     -fx-background-color: #212121; /* Background color */
-    -fx-padding: 1.5rem; /* Padding */
+    -fx-padding: 10px; /* Adjusted padding */
     -fx-border-radius: 10px; /* Border radius */
     -fx-border-style: dashed; /* Border style */
     -fx-cursor: hand; /* Cursor */
@@ -99,4 +82,40 @@
 /* MenuItem */
 .menu-item {
     -fx-text-fill: #006600; /* Dark green */
+}
+
+/* Custom Labels */
+.title-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Dark gray text color */
+}
+
+.type-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #666; /* Medium gray text color */
+}
+
+.description-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #666; /* Medium gray text color */
+    -fx-alignment: center;
+}
+
+.post-card {
+    -fx-background-color: #f9f9f9; /* Light gray */
+    -fx-border-color: #e0e0e0; /* Lighter gray */
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-padding: 15px;
+    -fx-margin: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-background-radius: 8px; /* Rounded corners */
+}
+
+.post-card:hover {
+    -fx-background-color: #adfa93; /* White */
+    -fx-border-color: #54ad43; /* Light gray */
 }

@@ -94,5 +94,28 @@ public class serviceComment {
         return comments;
     }
 
+    public List<comment> affichersingle(int idp) {
+        List<comment> comments = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM comment WHERE Id_post = " + idp;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            while (rs.next()) {
+                comment p = new comment();
+                //p.setId_comment(rs.getInt(1));
+
+                p.setComment(rs.getString("comment"));
+                p.setCreationdate(rs.getString("creationdate"));
+                p.setId_post(idp);
+                comments.add(p);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return comments;
+    }
+
 
 }
