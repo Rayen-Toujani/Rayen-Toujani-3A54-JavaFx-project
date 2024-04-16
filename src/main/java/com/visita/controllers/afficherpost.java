@@ -64,6 +64,17 @@ public class afficherpost {
 
     }
 
+    // Inside afficherpost controller
+
+    private void updateLikeButtonState(Button likeButton, int postId) {
+        if (sp.hasLikedPost(postId, loggedInUserId)) {
+            likeButton.setText("Unlike");
+        } else {
+            likeButton.setText("Like");
+        }
+    }
+
+
     private void showPostDetails(post p) {
         // Clear postContainer to remove previous post details
 
@@ -118,12 +129,50 @@ public class afficherpost {
 
         // Add all components to a VBox to display post details and comments
         VBox postWithComments = new VBox(postDetails, commentsContainer, addCommentBox);
+
         postWithComments.setSpacing(10); // Add spacing between components
 
         // Add the VBox containing post details and comments to the postContainer
         postContainer.getChildren().add(postWithComments);
 
         // Assuming you have a constant image path
+
+        // Inside showPostDetails and showPostDetailsuser methods
+
+// Like Button
+        Button likeButton = new Button();
+        updateLikeButtonState(likeButton, p.getId_post());
+
+        likeButton.setOnAction(event -> {
+            if (!sp.hasLikedPost(p.getId_post(), loggedInUserId)) {
+                // If the user hasn't liked the post yet, add a like
+                boolean success = sp.addLike(p.getId_post(), loggedInUserId);
+                if (success) {
+
+
+
+                    p.setLikes_post(p.getLikes_post()+1);
+                    sp.incrementLikes(p.getId_post());
+                    // Update UI or provide feedback to the user
+                    likeButton.setText("Unlike");
+                }
+            } else {
+                // If the user has already liked the post, remove the like
+                boolean success = sp.removeLike(p.getId_post(), loggedInUserId);
+                if (success) {
+
+
+
+                    sp.decrementLikes(p.getId_post());
+
+                    // Update UI or provide feedback to the user
+                    likeButton.setText("Like");
+                }
+            }
+        });
+
+// Add the like button to the VBox containing post details and comments
+        postWithComments.getChildren().add(likeButton);
 
 
     }
@@ -200,6 +249,43 @@ public class afficherpost {
 
         // Add the delete button to the VBox containing post details and comments
         postWithComments.getChildren().add(deleteButton);
+
+        // Like Button
+        Button likeButton = new Button();
+        updateLikeButtonState(likeButton, p.getId_post());
+
+        likeButton.setOnAction(event -> {
+            if (!sp.hasLikedPost(p.getId_post(), loggedInUserId)) {
+                // If the user hasn't liked the post yet, add a like
+                boolean success = sp.addLike(p.getId_post(), loggedInUserId);
+                if (success) {
+
+
+
+                    p.setLikes_post(p.getLikes_post()+1);
+                    sp.incrementLikes(p.getId_post());
+                    // Update UI or provide feedback to the user
+                    likeButton.setText("Unlike");
+                }
+            } else {
+                // If the user has already liked the post, remove the like
+                boolean success = sp.removeLike(p.getId_post(), loggedInUserId);
+                if (success) {
+
+
+
+                    sp.decrementLikes(p.getId_post());
+
+                    // Update UI or provide feedback to the user
+                    likeButton.setText("Like");
+                }
+            }
+        });
+
+// Add the like button to the VBox containing post details and comments
+        postWithComments.getChildren().add(likeButton);
+
+
     }
 
 

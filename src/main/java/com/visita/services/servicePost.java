@@ -1,6 +1,7 @@
 package com.visita.services;
 
 import com.visita.models.post;
+import com.visita.models.LikesPost;
 import com.visita.utils.DataSource;
 
 import java.sql.*;
@@ -193,5 +194,100 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         }
         return posts;
     }
+
+
+    public boolean addLike(int postId, int userId) {
+        boolean success = false;
+        try {
+            String query = "INSERT INTO likes_post (id_post, id_user) VALUES (?, ?)";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setInt(1, postId);
+            statement.setInt(2, userId);
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                success = true;
+                System.out.println("Like added successfully.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error adding like: " + ex.getMessage());
+        }
+        return success;
+    }
+
+
+    public boolean removeLike(int postId, int userId) {
+        boolean success = false;
+        try {
+            String query = "DELETE FROM likes_post WHERE id_post = ? AND id_user = ?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setInt(1, postId);
+            statement.setInt(2, userId);
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                success = true;
+                System.out.println("Like removed successfully.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error removing like: " + ex.getMessage());
+        }
+        return success;
+    }
+
+
+    // Inside servicePost class
+
+    public boolean hasLikedPost(int postId, int userId) {
+        // Implement logic to check if the user has already liked the post
+        // Query the database or any other storage mechanism to check if the like exists
+        // Return true if the user has liked the post, false otherwise
+        // Example:
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT COUNT(*) FROM likes_post WHERE id_post = ? AND id_user = ?")) {
+            ps.setInt(1, postId);
+            ps.setInt(2, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error checking if the user has liked the post: " + ex.getMessage());
+        }
+        return false;
+    }
+
+
+
+    public void incrementLikes(int postId) {
+        try {
+            String query = "UPDATE post SET likes_post = likes_post + 1 WHERE id_post = ?";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setInt(1, postId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Likes incremented for post with ID: " + postId);
+            } else {
+                System.out.println("Failed to increment likes for post with ID: " + postId);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error incrementing likes: " + ex.getMessage());
+        }
+    }
+
+    public void decrementLikes(int postId) {
+        try {
+            String query = "UPDATE post SET likes_post = likes_post - 1 WHERE id_post = ?";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setInt(1, postId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Likes decremented for post with ID: " + postId);
+            } else {
+                System.out.println("Failed to decrement likes for post with ID: " + postId);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error decrementing likes: " + ex.getMessage());
+        }
+    }
+
 
 }
