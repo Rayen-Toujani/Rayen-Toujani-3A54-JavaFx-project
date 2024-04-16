@@ -19,6 +19,8 @@ import java.util.List;
 
 public class afficherpost {
 
+    private int loggedInUserId = 7;
+
     @FXML
     private VBox postContainer; // Container for displaying posts
 
@@ -49,7 +51,7 @@ public class afficherpost {
             card.getStyleClass().add("post-card");
             card.setLeft(titleLabel);
             card.setTop(typeLabel);
-            card.setLeft(descriptionLabel);
+            card.setBottom(descriptionLabel);
             card.setRight(new StackPane(imageView));
 
             // Add event handler to show post details when clicked
@@ -58,6 +60,8 @@ public class afficherpost {
             // Add the card to the postContainer
             postContainer.getChildren().add(card);
         }
+
+
     }
 
     private void showPostDetails(post p) {
@@ -118,6 +122,138 @@ public class afficherpost {
 
         // Add the VBox containing post details and comments to the postContainer
         postContainer.getChildren().add(postWithComments);
+
+        // Assuming you have a constant image path
+
+
+    }
+
+
+    private void showPostDetailsuser(post p) {
+        // Clear postContainer to remove previous post details
+
+
+
+        postContainer.getChildren().clear();
+
+        // Create labels for title, type, and description
+        Label titleLabel = new Label("Title: " + p.getTitle_post());
+        titleLabel.getStyleClass().add("title-label");
+        Label typeLabel = new Label("Type: " + p.getType_post());
+        typeLabel.getStyleClass().add("type-label");
+        Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+        descriptionLabel.getStyleClass().add("description-label");
+
+        // Create an ImageView for displaying the image
+        ImageView imageView = new ImageView(new Image(p.getImage_post()));
+        imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
+        imageView.setFitHeight(200); // Set height to 200 (adjust as needed)
+
+        // Add all components to a VBox to display them vertically
+        VBox postDetails = new VBox(titleLabel, typeLabel, descriptionLabel, imageView);
+        postDetails.setAlignment(Pos.CENTER);
+        postDetails.setSpacing(10); // Add spacing between components
+
+        // Fetch comments for the selected post
+        List<comment> comments = sc.affichersingle(p.getId_post());
+
+        // Display comments
+        VBox commentsContainer = new VBox();
+        for (comment c : comments) {
+
+            Label commentLabel = new Label("Comment: " + c.getComment());
+            commentsContainer.getChildren().add(commentLabel);
+
+        }
+
+        // Input area for adding new comments
+        // Replace this with your desired input area implementation
+        TextArea commentInput = new TextArea();
+        Button addCommentButton = new Button("Add Comment");
+        addCommentButton.setOnAction(event -> {
+            String newCommentText = commentInput.getText();
+            // Add new comment logic here
+            sc.ajouter(new comment(1,p.getId_post(),"aaa",newCommentText));
+            showPostDetails(p);
+
+        });
+
+
+        VBox addCommentBox = new VBox(commentInput, addCommentButton);
+
+        // Add all components to a VBox to display post details and comments
+        VBox postWithComments = new VBox(postDetails, commentsContainer, addCommentBox);
+        postWithComments.setSpacing(10); // Add spacing between components
+
+        // Add the VBox containing post details and comments to the postContainer
+        postContainer.getChildren().add(postWithComments);
+
+        // Assuming you have a constant image path
+
+        Button deleteButton = new Button("Delete Post");
+        deleteButton.setOnAction(event -> {
+            // Delete the post logic here
+            sp.Supprimer(p.getId_post()); // Replace deletePost with your actual method
+            // Refresh posts after deletion
+            showUserPosts();
+        });
+
+        // Add the delete button to the VBox containing post details and comments
+        postWithComments.getChildren().add(deleteButton);
+    }
+
+
+
+
+    @FXML
+    private void showUserPosts() {
+        // Example: Load posts by the logged-in user from a database or other source
+        List<post> userPosts = sp.afficheruserpost(loggedInUserId); // Replace getPostsByUser with your actual method
+
+        // Clear postContainer to remove previous post details
+        postContainer.getChildren().clear();
+
+        for (post p : userPosts) {
+            // Create labels for title, type, and description
+            Label titleLabel = new Label("Title: " + p.getTitle_post());
+            titleLabel.getStyleClass().add("title-label");
+            Label typeLabel = new Label("Type: " + p.getType_post());
+            typeLabel.getStyleClass().add("type-label");
+            Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+            descriptionLabel.getStyleClass().add("description-label");
+
+            // Create an ImageView for displaying the image
+            ImageView imageView = new ImageView(new Image(p.getImage_post()));
+            imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
+            imageView.setFitHeight(200); // Set height to 200 (adjust as needed)
+
+            // Create a BorderPane to act as the card
+            BorderPane card = new BorderPane();
+            card.getStyleClass().add("post-card");
+            card.setLeft(titleLabel);
+            card.setTop(typeLabel);
+            card.setBottom(descriptionLabel);
+            card.setRight(new StackPane(imageView));
+
+            // Add event handler to show post details when clicked
+            card.setOnMouseClicked(event -> showPostDetailsuser(p));
+
+            // Add the delete button for each post
+            Button deleteButton = new Button("Delete Post");
+            deleteButton.setOnAction(event -> {
+                // Delete the post logic here
+                sp.Supprimer(p.getId_post()); // Replace deletePost with your actual method
+                // Refresh posts after deletion
+                showUserPosts();
+            });
+
+            // Create a VBox to hold the card and delete button
+            VBox postWithDeleteButton = new VBox(card);
+            postWithDeleteButton.setSpacing(10); // Add spacing between components
+
+            // Add the VBox containing the card and delete button to the postContainer
+            postContainer.getChildren().add(postWithDeleteButton);
+        }
     }
 
     @FXML
@@ -125,5 +261,12 @@ public class afficherpost {
         postContainer.getChildren().clear();
         initialize(); // Reload all posts
     }
+
+    @FXML
+    private void showUserPostsButtonClicked() {
+        // Call the method to display the user's posts
+        showUserPosts();
+    }
+
 
 }

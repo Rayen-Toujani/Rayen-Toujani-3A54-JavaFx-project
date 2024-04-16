@@ -67,6 +67,7 @@
                                     <VBox layoutY="97.0" prefHeight="450.0" prefWidth="262.0">
                               <children>
                                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" text="Back to All Posts" />
+                                 <Button fx:id="backButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" text="showUserPostsButtonClicked" />
                               </children>
                                     </VBox>
                                 </children>

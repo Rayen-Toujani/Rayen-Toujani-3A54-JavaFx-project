@@ -51,6 +51,24 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         }
         return a;
     }
+
+    public List<post> getPostsByUser(int userId) {
+        List<post> userPosts = new ArrayList<>();
+
+        servicePost ps = new servicePost();
+
+        // Assuming you have a list of all posts in your application
+        List<post> allPosts = ps.afficher(); // Replace sp.afficher() with your actual method to get all posts
+
+        // Iterate through all posts and filter those belonging to the specified user
+        for (post p : allPosts) {
+            if (p.getId_creator() == userId) { // Replace getUserId() with the method to get the user ID associated with the post
+                userPosts.add(p);
+            }
+        }
+
+        return userPosts;
+    }
     private String getCurrentCountry() throws IOException {
         // Construct the URL with your token as a query parameter
         String url = "https://ipinfo.io/json?token=0017357e92579e";
@@ -130,6 +148,31 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         List<post> posts = new ArrayList<>();
         try {
             String req = "select * from post ";
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            while (rs.next()) {
+                post p = new post();
+                p.setId_post(rs.getInt(1));
+                p.setDescription_post(rs.getString("Description_post"));
+                p.setTitle_post(rs.getString("Title_post"));
+                p.setType_post(rs.getString("Type_post"));
+                p.setDateposted(rs.getString("Dateposted"));
+                p.setImage_post(rs.getString("Image_post"));
+                posts.add(p);
+            }
+            System.out.print(posts);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return posts;
+    }
+
+    public List<post> afficheruserpost(int idp) {
+        List<post> posts = new ArrayList<>();
+        try {
+            String req = "select * from post WHERE id_creator ="+idp;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
 
