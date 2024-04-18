@@ -17,6 +17,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
 <AnchorPane prefHeight="1004.0" prefWidth="1931.0" stylesheets="addpostStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
     <ScrollPane prefHeight="1004.0" prefWidth="1943.0">
         <content>
@@ -105,6 +106,8 @@
                                         <Button fx:id="previousPageButton" layoutX="643.0" layoutY="-4.0" onAction="#goToPreviousPage" text="Previous Page" />
                                   <Label fx:id="pageInfoLabel" alignment="CENTER" layoutX="775" prefHeight="17.0" prefWidth="139.0" />
                                   <Button fx:id="nextPageButton" layoutX="907.0" layoutY="-4.0" onAction="#goToNextPage" text="Next Page" />
+                            <TextField fx:id="searchBar" layoutX="10" layoutY="10" promptText="Search posts" />
+
                         </children></Pane>
                             <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
                         </children>

@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -37,6 +34,10 @@ public class afficherpost {
 
     @FXML
     private ChoiceBox<String> choiceres;
+
+    @FXML
+    private TextField searchBar;
+
 
 
     @FXML
@@ -66,6 +67,17 @@ public class afficherpost {
 
         // Example: Load posts for the current page
         loadPosts(currentPage);
+
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+    }
+
+    @FXML
+    private void searchPosts() {
+        String query = searchBar.getText().toLowerCase();
+
+        List<post> filteredPosts = sp.searchPosts(query);
+
+        displayPosts(filteredPosts);
     }
 
     @FXML
@@ -131,6 +143,8 @@ public class afficherpost {
 
 
     private void displayPosts(List<post> posts) {
+
+        postContainer.getChildren().clear();
         // Iterate through the list of posts and display each one
         for (post p : posts) {
             // Create labels for title, type, and description

@@ -446,6 +446,47 @@ private     Connection cnx = DataSource.getInstance().getConnection();
     }
 
 
+    public List<post> searchPosts(String keyword) {
+        // Initialize an empty list to hold the matching posts
+        List<post> matchingPosts = new ArrayList<>();
+
+        // Create the SQL query to search for posts by keyword in title and description
+        String sqlQuery = "SELECT * FROM post WHERE LOWER(title_post) LIKE ? OR LOWER(description_post) LIKE ?";
+
+        try (PreparedStatement ps = cnx.prepareStatement(sqlQuery)) {
+            // Set the parameters for the prepared statement
+            String searchPattern = "%" + keyword.toLowerCase() + "%";
+            ps.setString(1, searchPattern);
+            ps.setString(2, searchPattern);
+
+            // Execute the query and get the result set
+            ResultSet rs = ps.executeQuery();
+
+            // Iterate through the result set and create post objects
+            while (rs.next()) {
+                // Create a new post object from the current row in the result set
+                post p = new post();
+                p.setId_post(rs.getInt("id_post"));
+                p.setTitle_post(rs.getString("title_post"));
+                p.setDescription_post(rs.getString("description_post"));
+                p.setType_post(rs.getString("type_post"));
+                p.setImage_post(rs.getString("image_post"));
+                p.setLikes_post(rs.getInt("likes_post"));
+                p.setDateposted(rs.getString("Dateposted"));
+                p.setCountry(rs.getString("country"));
+
+                // Add the post to the list of matching posts
+                matchingPosts.add(p);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error searching for posts: " + ex.getMessage());
+        }
+
+        // Return the list of matching posts
+        return matchingPosts;
+    }
+
 
 
 }
