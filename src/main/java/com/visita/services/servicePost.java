@@ -392,5 +392,60 @@ private     Connection cnx = DataSource.getInstance().getConnection();
     }
 
 
+    public List<post> getPostsOrderByLikes(int offset, int pageSize) {
+        List<post> orderedPosts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY likes_post DESC LIMIT ? OFFSET ?")) {
+            ps.setInt(1, pageSize);
+            ps.setInt(2, offset);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    orderedPosts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching posts ordered by likes: " + ex.getMessage());
+        }
+        return orderedPosts;
+    }
+
+
+    public List<post> getPostsOrderByDateDescending(int offset, int pageSize) {
+        List<post> orderedPosts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY Dateposted DESC LIMIT ? OFFSET ?")) {
+            ps.setInt(1, pageSize);
+            ps.setInt(2, offset);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    orderedPosts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching posts ordered by date descending: " + ex.getMessage());
+        }
+        return orderedPosts;
+    }
+
+
+    public List<post> getPostsOrderByDateAscending(int offset, int pageSize) {
+        List<post> orderedPosts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY Dateposted ASC LIMIT ? OFFSET ?")) {
+            ps.setInt(1, pageSize);
+            ps.setInt(2, offset);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    orderedPosts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching posts ordered by date descending: " + ex.getMessage());
+        }
+        return orderedPosts;
+    }
+
+
+
 
 }

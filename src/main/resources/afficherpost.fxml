@@ -16,6 +16,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <AnchorPane prefHeight="1004.0" prefWidth="1931.0" stylesheets="addpostStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
     <ScrollPane prefHeight="1004.0" prefWidth="1943.0">
         <content>
@@ -114,6 +115,7 @@
                 </children>
             </VBox>
         </content>
+
 
     </ScrollPane>
 </AnchorPane>

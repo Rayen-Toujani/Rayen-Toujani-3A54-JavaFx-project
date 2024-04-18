@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -33,6 +34,9 @@ public class afficherpost {
 
     @FXML
     private VBox postContainer; // Container for displaying posts
+
+    @FXML
+    private ChoiceBox<String> choiceres;
 
 
     @FXML
