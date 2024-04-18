@@ -289,5 +289,24 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         }
     }
 
+    public int countLikesForPost(int postId) {
+        int likeCount = 0;
+        try {
+            String query = "SELECT COUNT(*) AS like_count FROM likes_post WHERE id_post = ?";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setInt(1, postId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                likeCount = rs.getInt("like_count");
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error counting likes for post with ID " + postId + ": " + ex.getMessage());
+        }
+        return likeCount;
+    }
+
+
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class afficherpost {
 
-    private int loggedInUserId = 7;
+    private int loggedInUserId = 777;
 
     @FXML
     private VBox postContainer; // Container for displaying posts
@@ -41,6 +41,9 @@ public class afficherpost {
             Label descriptionLabel = new Label("Description: " + p.getDescription_post());
             descriptionLabel.getStyleClass().add("description-label");
 
+            Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+            likesLabel.getStyleClass().add("likes-label");
+
             // Create an ImageView for displaying the image
             ImageView imageView = new ImageView(new Image(p.getImage_post()));
             imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
@@ -54,6 +57,9 @@ public class afficherpost {
             card.setBottom(descriptionLabel);
             card.setRight(new StackPane(imageView));
 
+
+            BorderPane.setAlignment(likesLabel, Pos.BOTTOM_RIGHT);
+            card.setBottom(likesLabel);
             // Add event handler to show post details when clicked
             card.setOnMouseClicked(event -> showPostDetails(p));
 
@@ -77,9 +83,6 @@ public class afficherpost {
 
     private void showPostDetails(post p) {
         // Clear postContainer to remove previous post details
-
-
-
         postContainer.getChildren().clear();
 
         // Create labels for title, type, and description
@@ -90,13 +93,17 @@ public class afficherpost {
         Label descriptionLabel = new Label("Description: " + p.getDescription_post());
         descriptionLabel.getStyleClass().add("description-label");
 
+        // Create a label to display the number of likes
+        Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+        likesLabel.getStyleClass().add("likes-label");
+
         // Create an ImageView for displaying the image
         ImageView imageView = new ImageView(new Image(p.getImage_post()));
         imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
         imageView.setFitHeight(200); // Set height to 200 (adjust as needed)
 
         // Add all components to a VBox to display them vertically
-        VBox postDetails = new VBox(titleLabel, typeLabel, descriptionLabel, imageView);
+        VBox postDetails = new VBox(titleLabel, typeLabel, descriptionLabel, imageView, likesLabel);
         postDetails.setAlignment(Pos.CENTER);
         postDetails.setSpacing(10); // Add spacing between components
 
@@ -106,10 +113,8 @@ public class afficherpost {
         // Display comments
         VBox commentsContainer = new VBox();
         for (comment c : comments) {
-
-                Label commentLabel = new Label("Comment: " + c.getComment());
-                commentsContainer.getChildren().add(commentLabel);
-
+            Label commentLabel = new Label("Comment: " + c.getComment());
+            commentsContainer.getChildren().add(commentLabel);
         }
 
         // Input area for adding new comments
@@ -119,27 +124,13 @@ public class afficherpost {
         addCommentButton.setOnAction(event -> {
             String newCommentText = commentInput.getText();
             // Add new comment logic here
-            sc.ajouter(new comment(1,p.getId_post(),"aaa",newCommentText));
+            sc.ajouter(new comment(1, p.getId_post(), "aaa", newCommentText));
             showPostDetails(p);
-
         });
-
 
         VBox addCommentBox = new VBox(commentInput, addCommentButton);
 
-        // Add all components to a VBox to display post details and comments
-        VBox postWithComments = new VBox(postDetails, commentsContainer, addCommentBox);
-
-        postWithComments.setSpacing(10); // Add spacing between components
-
-        // Add the VBox containing post details and comments to the postContainer
-        postContainer.getChildren().add(postWithComments);
-
-        // Assuming you have a constant image path
-
-        // Inside showPostDetails and showPostDetailsuser methods
-
-// Like Button
+        // Like Button
         Button likeButton = new Button();
         updateLikeButtonState(likeButton, p.getId_post());
 
@@ -148,11 +139,9 @@ public class afficherpost {
                 // If the user hasn't liked the post yet, add a like
                 boolean success = sp.addLike(p.getId_post(), loggedInUserId);
                 if (success) {
-
-
-
-                    p.setLikes_post(p.getLikes_post()+1);
-                    sp.incrementLikes(p.getId_post());
+                    // Update the likes count and label
+                    p.setLikes_post(p.getLikes_post() + 1);
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Unlike");
                 }
@@ -160,21 +149,21 @@ public class afficherpost {
                 // If the user has already liked the post, remove the like
                 boolean success = sp.removeLike(p.getId_post(), loggedInUserId);
                 if (success) {
-
-
-
-                    sp.decrementLikes(p.getId_post());
-
+                    // Update the likes count and label
+                    p.setLikes_post(p.getLikes_post() - 1);
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Like");
                 }
             }
         });
 
-// Add the like button to the VBox containing post details and comments
-        postWithComments.getChildren().add(likeButton);
+        // Add the like button and likes label to the VBox containing post details and comments
+        VBox postWithComments = new VBox(postDetails, commentsContainer, addCommentBox, likeButton);
+        postWithComments.setSpacing(10); // Add spacing between components
 
-
+        // Add the VBox containing post details and comments to the postContainer
+        postContainer.getChildren().add(postWithComments);
     }
 
 
@@ -193,13 +182,18 @@ public class afficherpost {
         Label descriptionLabel = new Label("Description: " + p.getDescription_post());
         descriptionLabel.getStyleClass().add("description-label");
 
+
+        Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+        likesLabel.getStyleClass().add("likes-label");
+
+
         // Create an ImageView for displaying the image
         ImageView imageView = new ImageView(new Image(p.getImage_post()));
         imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
         imageView.setFitHeight(200); // Set height to 200 (adjust as needed)
 
         // Add all components to a VBox to display them vertically
-        VBox postDetails = new VBox(titleLabel, typeLabel, descriptionLabel, imageView);
+        VBox postDetails = new VBox(titleLabel, typeLabel, descriptionLabel, imageView ,likesLabel);
         postDetails.setAlignment(Pos.CENTER);
         postDetails.setSpacing(10); // Add spacing between components
 
@@ -262,10 +256,14 @@ public class afficherpost {
 
 
 
-                    p.setLikes_post(p.getLikes_post()+1);
-                    sp.incrementLikes(p.getId_post());
+                    p.setLikes_post(p.getLikes_post() + 1);
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Unlike");
+
+
+
+
                 }
             } else {
                 // If the user has already liked the post, remove the like
@@ -274,10 +272,14 @@ public class afficherpost {
 
 
 
-                    sp.decrementLikes(p.getId_post());
-
+                    p.setLikes_post(p.getLikes_post() - 1);
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Like");
+
+
+
+
                 }
             }
         });
@@ -307,6 +309,9 @@ public class afficherpost {
             typeLabel.getStyleClass().add("type-label");
             Label descriptionLabel = new Label("Description: " + p.getDescription_post());
             descriptionLabel.getStyleClass().add("description-label");
+            Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+            likesLabel.getStyleClass().add("likes-label");
+
 
             // Create an ImageView for displaying the image
             ImageView imageView = new ImageView(new Image(p.getImage_post()));
@@ -320,6 +325,9 @@ public class afficherpost {
             card.setTop(typeLabel);
             card.setBottom(descriptionLabel);
             card.setRight(new StackPane(imageView));
+
+            BorderPane.setAlignment(likesLabel, Pos.BOTTOM_RIGHT);
+            card.setBottom(likesLabel);
 
             // Add event handler to show post details when clicked
             card.setOnMouseClicked(event -> showPostDetailsuser(p));

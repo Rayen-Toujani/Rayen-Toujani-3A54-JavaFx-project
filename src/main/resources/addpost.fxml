@@ -79,7 +79,7 @@
                         <children>
                            <Button fx:id="submit_bttn" layoutX="690.0" layoutY="788.0" onAction="#handleSubmitButtonClick" text="Submit" />
       
-                           <ImageView fx:id="uploadedImageView" fitHeight="338.0" fitWidth="803.0" layoutX="554.0" layoutY="204.0" />
+                           <ImageView fx:id="uploadedImageView" fitHeight="318.0" fitWidth="743.0" layoutX="573.0" layoutY="135.0" />
                            <Button fx:id="uploadImageButton" layoutX="377.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleUploadImageClick" text="Upload Image" />
                            <TextArea fx:id="Post_Description" layoutX="15.0" layoutY="475.0" prefHeight="296.0" prefWidth="1233.0" promptText="Post Content" />
                            <TextField fx:id="Post_Title" layoutX="15.0" layoutY="52.0" prefHeight="170.0" prefWidth="539.0" promptText="Post Title" />
