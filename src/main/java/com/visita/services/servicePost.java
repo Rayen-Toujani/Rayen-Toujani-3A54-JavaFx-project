@@ -269,6 +269,27 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         return totalCount;
     }
 
+    public int countTotalPostsuser(int user_id) {
+        int totalCount = 0;
+        String query = "SELECT COUNT(*) FROM post WHERE id_user = ?";
+
+        try (PreparedStatement ps = cnx.prepareStatement(query)) {
+            // Set the user_id parameter
+            ps.setInt(1, user_id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    totalCount = rs.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error counting total posts: " + ex.getMessage());
+            // Consider logging or rethrowing the exception based on your needs
+        }
+
+        return totalCount;
+    }
+
     private post populatePostFromResultSet(ResultSet rs) throws SQLException {
         post p = new post();
         p.setId_post(rs.getInt("id_post"));
@@ -298,6 +319,25 @@ private     Connection cnx = DataSource.getInstance().getConnection();
     }
 
 
+    public List<post> getPaginatedUserPosts(int offset, int pageSize, int id_user) {
+        List<post> posts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post WHERE id_user = ? LIMIT ?, ?")) {
+            // Set parameters in the order they appear in the query
+            ps.setInt(1, id_user);
+            ps.setInt(2, offset);
+            ps.setInt(3, pageSize);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    posts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching posts for page: " + ex.getMessage());
+        }
+        return posts;
+    }
 
 
 

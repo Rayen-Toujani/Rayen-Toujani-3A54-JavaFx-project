@@ -211,12 +211,16 @@ public class afficherpost {
             commentsContainer.getChildren().add(commentLabel);
         }
 
+
+
         // Input area for adding new comments
         // Replace this with your desired input area implementation
         TextArea commentInput = new TextArea();
         Button addCommentButton = new Button("Add Comment");
         addCommentButton.setOnAction(event -> {
             String newCommentText = commentInput.getText();
+            // Filter the new comment
+            newCommentText = CommentFilter.filterComment(newCommentText);
             // Add new comment logic here
             sc.ajouter(new comment(1, p.getId_post(), "aaa", newCommentText));
             showPostDetails(p);
@@ -478,18 +482,21 @@ public class afficherpost {
     }
 
 
-
+    private int whereami;
 
     @FXML
     private void backToAllPosts() {
         postContainer.getChildren().clear();
         initialize(); // Reload all posts
+        whereami =1;
     }
 
     @FXML
     private void showUserPostsButtonClicked() {
         // Call the method to display the user's posts
         showUserPosts();
+        whereami =0;
+
     }
 
 
