@@ -140,6 +140,7 @@ public class afficherpost {
             Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
             likesLabel.getStyleClass().add("likes-label");
 
+
             // Create an ImageView for displaying the image
             ImageView imageView = new ImageView(new Image(p.getImage_post()));
             imageView.setFitWidth(200); // Set width to 200 (adjust as needed)
