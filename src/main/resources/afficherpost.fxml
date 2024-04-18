@@ -67,7 +67,7 @@
                                     <VBox layoutY="97.0" prefHeight="450.0" prefWidth="262.0">
                               <children>
                                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" text="Back to All Posts" />
-                                 <Button fx:id="backButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" text="showUserPostsButtonClicked" />
+                                 <Button fx:id="backButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" text="show My Post's" />
                               </children>
                                     </VBox>
                                 </children>
@@ -96,7 +96,15 @@
                                     <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
                                 </textFill>
                             </Label>
-                            <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+                            <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS">
+                        <children>
+                                  <!-- Move the buttons here -->
+
+
+                                        <Button fx:id="previousPageButton" layoutX="643.0" layoutY="-4.0" onAction="#goToPreviousPage" text="Previous Page" />
+                                  <Label fx:id="pageInfoLabel" alignment="CENTER" layoutX="775" prefHeight="17.0" prefWidth="139.0" />
+                                  <Button fx:id="nextPageButton" layoutX="907.0" layoutY="-4.0" onAction="#goToNextPage" text="Next Page" />
+                        </children></Pane>
                             <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
                         </children>
                         <padding>
@@ -106,5 +114,6 @@
                 </children>
             </VBox>
         </content>
+
     </ScrollPane>
 </AnchorPane>

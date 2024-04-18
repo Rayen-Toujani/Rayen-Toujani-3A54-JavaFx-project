@@ -256,6 +256,50 @@ private     Connection cnx = DataSource.getInstance().getConnection();
     }
 
 
+    public int countTotalPosts() {
+        int totalCount = 0;
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT COUNT(*) FROM post");
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                totalCount = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error counting total posts: " + ex.getMessage());
+        }
+        return totalCount;
+    }
+
+    private post populatePostFromResultSet(ResultSet rs) throws SQLException {
+        post p = new post();
+        p.setId_post(rs.getInt("id_post"));
+        p.setTitle_post(rs.getString("title_post"));
+        p.setType_post(rs.getString("type_post"));
+        p.setDescription_post(rs.getString("description_post"));
+        p.setImage_post(rs.getString("image_post"));
+        // Populate other attributes as needed
+        return p;
+    }
+
+    public List<post> getPostsForPage(int offset, int pageSize) {
+        List<post> posts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post LIMIT ? OFFSET ?")) {
+            ps.setInt(1, pageSize);
+            ps.setInt(2, offset);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    posts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching posts for page: " + ex.getMessage());
+        }
+        return posts;
+    }
+
+
+
+
 
     public void incrementLikes(int postId) {
         try {

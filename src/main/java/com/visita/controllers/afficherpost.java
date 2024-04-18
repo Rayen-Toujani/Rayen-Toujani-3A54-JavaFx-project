@@ -26,17 +26,108 @@ public class afficherpost {
 
     private int loggedInUserId = 777;
 
+    private int currentPage = 1; // Initialize current page to 1
+    private int pageSize = 10; // Set page size to 10 posts per page
+    private int totalPosts; // Total number of posts
+    private int totalPages; // Total number of pages
+
     @FXML
     private VBox postContainer; // Container for displaying posts
+
+
+    @FXML
+    private Button previousPageButton;
+
+    @FXML
+    private Button nextPageButton;
+
+    @FXML
+    private Label pageInfoLabel;
 
 
     private final servicePost sp = new servicePost();
     private final serviceComment sc = new serviceComment();
 
-    public void initialize() {
-        // Example: Load posts from a database or other source
-        List<post> posts = sp.afficher();
 
+
+
+
+
+    public void initialize() {
+        // Calculate total number of posts
+        totalPosts = sp.countTotalPosts();
+
+        // Update total pages
+        updateTotalPages();
+
+        // Example: Load posts for the current page
+        loadPosts(currentPage);
+    }
+
+    @FXML
+    private void loadPosts(int page) {
+        // Calculate offset based on page number and page size
+        int offset = (page - 1) * pageSize;
+        // Load posts for the specified page
+        List<post> posts = sp.getPostsForPage(offset, pageSize);
+        // Display the loaded posts
+        displayPosts(posts);
+    }
+
+
+    @FXML
+    private void goToPreviousPage() {
+        System.out.println("Previous Page Button Clicked");
+        if (currentPage > 1) {
+            currentPage--;
+            loadPosts(currentPage);
+            updateTotalPages(); // Update total pages
+            updatePaginationUI(); // Update pagination UI
+
+        }
+        postContainer.getChildren().clear();
+        initialize();
+    }
+
+    @FXML
+    private void goToNextPage() {
+        System.out.println("Next Page Button Clicked");
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadPosts(currentPage);
+            updateTotalPages(); // Update total pages
+            updatePaginationUI(); // Update pagination UI
+
+        }
+        postContainer.getChildren().clear();
+        initialize();
+    }
+
+
+
+    @FXML
+    private void updatePaginationUI() {
+        // Update page information label
+        pageInfoLabel.setText("Page " + currentPage + " of " + totalPages);
+
+        // Disable previous page button if on the first page
+        previousPageButton.setDisable(currentPage == 1);
+
+        // Disable next page button if on the last page
+        nextPageButton.setDisable(currentPage == totalPages);
+    }
+
+
+    private void updateTotalPages() {
+        // Recalculate total number of pages
+        totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+    }
+
+
+
+
+    private void displayPosts(List<post> posts) {
+        // Iterate through the list of posts and display each one
         for (post p : posts) {
             // Create labels for title, type, and description
             Label titleLabel = new Label("Title: " + p.getTitle_post());
@@ -62,17 +153,15 @@ public class afficherpost {
             card.setBottom(descriptionLabel);
             card.setRight(new StackPane(imageView));
 
-
             BorderPane.setAlignment(likesLabel, Pos.BOTTOM_RIGHT);
             card.setBottom(likesLabel);
+
             // Add event handler to show post details when clicked
             card.setOnMouseClicked(event -> showPostDetails(p));
 
             // Add the card to the postContainer
             postContainer.getChildren().add(card);
         }
-
-
     }
 
     // Inside afficherpost controller
