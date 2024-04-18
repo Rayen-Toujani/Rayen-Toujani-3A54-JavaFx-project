@@ -3,7 +3,10 @@ package com.visita.controllers;
 import com.visita.models.post;
 import com.visita.models.comment;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -14,7 +17,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import com.visita.services.servicePost;
 import com.visita.services.serviceComment;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class afficherpost {
@@ -241,8 +246,41 @@ public class afficherpost {
             showUserPosts();
         });
 
+        Button modifyButton = new Button("Modify Post");
+        modifyButton.setOnAction(event -> {
+            // Handle modify button click event
+            // Open a window or dialog for modifying the post details
+        });
+
+
         // Add the delete button to the VBox containing post details and comments
         postWithComments.getChildren().add(deleteButton);
+
+        postWithComments.getChildren().add(modifyButton);
+
+        modifyButton.setOnAction(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/modifypost.fxml"));
+                Parent root = loader.load();
+
+                // Pass the selected post object to the modify post controller
+                modifypost modifyPostController = loader.getController();
+                modifyPostController.initData(p);
+
+                // Add event handler for when the modification window closes
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setOnHidden(e -> {
+                    // Refresh post details after modification window is closed
+                    showPostDetailsuser(p);
+                });
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
 
         // Like Button
         Button likeButton = new Button();
@@ -349,6 +387,9 @@ public class afficherpost {
             postContainer.getChildren().add(postWithDeleteButton);
         }
     }
+
+
+
 
     @FXML
     private void backToAllPosts() {
