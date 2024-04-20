@@ -34,29 +34,41 @@
     }
 }
 
-/* TextField */
-.text-field {
-    -fx-font-size: 14px;
-    -fx-background-color: #ffffff; /* White */
+
+
+.custom-textarea {
+    -fx-background-color: #54ad43; /* Background color */
+    -fx-text-fill: #333; /* Text color */
+    -fx-border-color: #54ad43; /* Border color */
+    -fx-border-radius: 5; /* Border radius */
+    -fx-background-radius: 1; /* Background radius */
+    -fx-padding: 3; /* Padding inside the TextArea */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-family: 'Arial'; /* Font family */
 }
 
-/* TextArea */
-.text-area {
-    -fx-border-width: 2px;
-    -fx-border-color: transparent;
-    -fx-background-color: #F3F3F3;
-    -fx-border-radius: 10px;
-    -fx-padding: 8px; /* Adjusted padding */
-    -fx-font-size: 14px;
-    -fx-transition: all 0.5s;
+/* Optional hover effect */
+.custom-textarea:hover {
+    -fx-background-color: #9de37b; /* Lighter background color on hover */
 }
 
-.text-area:hover,
-.text-area:focused {
-    -fx-border-color: #4A9DEC;
-    -fx-background-color: white;
+
+/* Style for the TextField */
+.custom-textfield {
+    -fx-background-color: #ffffff; /* Background color */
+    -fx-text-fill: #333; /* Text color */
+    -fx-border-color: #54ad43; /* Border color */
+    -fx-border-radius: 10; /* Border radius */
+    -fx-background-radius: 15; /* Background radius */
+    -fx-padding: 15; /* Padding inside the TextField */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-family: 'Arial'; /* Font family */
 }
 
+/* Optional hover effect */
+.custom-textfield:hover {
+    -fx-border-color: #aaa; /* Darker border color on hover */
+}
 /* ImageView */
 .image-view {
     -fx-border-color: #006600; /* Dark green */

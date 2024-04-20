@@ -211,9 +211,14 @@ public class afficherpost {
             Label descriptionLabel = new Label("Description: " + p.getDescription_post());
             descriptionLabel.getStyleClass().add("description-label");
 
+            // Create additional labels for date posted and country
+            Label dateLabel = new Label("Date: " + p.getDateposted());
+            dateLabel.getStyleClass().add("date-label");
+            Label countryLabel = new Label("Country: " + p.getCountry());
+            countryLabel.getStyleClass().add("country-label");
+
             Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
             likesLabel.getStyleClass().add("likes-label");
-
 
             // Create an ImageView for displaying the image
             ImageView imageView = new ImageView(new Image(p.getImage_post()));
@@ -223,19 +228,28 @@ public class afficherpost {
             // Create a BorderPane to act as the card
             BorderPane card = new BorderPane();
             card.getStyleClass().add("post-card");
-            card.setLeft(titleLabel);
+
+            // Set left, top, and right contents
+            VBox leftContainer = new VBox(titleLabel, typeLabel, dateLabel, countryLabel);
+            card.setLeft(leftContainer);
             card.setTop(typeLabel);
-            card.setBottom(descriptionLabel);
             card.setRight(new StackPane(imageView));
 
-            BorderPane.setAlignment(likesLabel, Pos.BOTTOM_RIGHT);
-            card.setBottom(likesLabel);
+            // Set bottom content
+            VBox bottomContainer = new VBox(descriptionLabel, likesLabel);
+            card.setBottom(bottomContainer);
+            //BorderPane.setAlignment(likesLabel, Pos.BOTTOM_RIGHT);
 
             // Add event handler to show post details when clicked
             card.setOnMouseClicked(event -> showPostDetails(p));
 
             // Add the card to the postContainer
             postContainer.getChildren().add(card);
+
+
+            // Optionally, set preferred width and margin for the card
+            card.setPrefWidth(300); // Adjust the card width as needed
+            card.setStyle("-fx-margin-left: 10; -fx-margin-right: 10;"); // Adjust left and right margin as needed
         }
     }
 
@@ -435,6 +449,7 @@ public class afficherpost {
                 modifypost modifyPostController = loader.getController();
                 modifyPostController.initData(p);
 
+
                 // Add event handler for when the modification window closes
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
@@ -573,6 +588,14 @@ public class afficherpost {
         showUserPosts();
 
     }
+    @FXML
+    private void showaddpost() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/addpost.fxml"));
+        Parent root = loader.load();
+        postContainer.getScene().setRoot(root);
+
+    }
+
 
 
 }

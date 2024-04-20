@@ -300,11 +300,16 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
     private post populatePostFromResultSet(ResultSet rs) throws SQLException {
         post p = new post();
+        p.setId_post(rs.getInt(1));
         p.setId_post(rs.getInt("id_post"));
+        p.setDescription_post(rs.getString("description_post"));
         p.setTitle_post(rs.getString("title_post"));
         p.setType_post(rs.getString("type_post"));
-        p.setDescription_post(rs.getString("description_post"));
+        p.setDateposted(rs.getString("dateposted"));
         p.setImage_post(rs.getString("image_post"));
+        p.setLikes_post(rs.getInt("likes_post"));
+        p.setId_creator(rs.getInt("id_creator"));
+        p.setCountry(rs.getString("country"));
         // Populate other attributes as needed
         return p;
     }

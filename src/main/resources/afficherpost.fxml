@@ -7,149 +7,276 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1004.0" prefWidth="1931.0" stylesheets="addpostStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
-    <ScrollPane prefHeight="1004.0" prefWidth="1943.0">
-        <content>
-            <VBox layoutX="20.0" layoutY="20.0" prefHeight="968.0" prefWidth="1920">
-                <children>
-                    <MenuBar VBox.vgrow="NEVER">
-                        <menus>
-                            <Menu mnemonicParsing="false" text="File">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" text="New" />
-                                    <MenuItem mnemonicParsing="false" text="Open…" />
-                                    <Menu mnemonicParsing="false" text="Open Recent" />
-                                    <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem mnemonicParsing="false" text="Close" />
-                                    <MenuItem mnemonicParsing="false" text="Save" />
-                                    <MenuItem mnemonicParsing="false" text="Save As…" />
-                                    <MenuItem mnemonicParsing="false" text="Revert" />
-                                    <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem mnemonicParsing="false" text="Preferences…" />
-                                    <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem mnemonicParsing="false" text="Quit" />
-                                </items>
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Edit">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" text="Undo" />
-                                    <MenuItem mnemonicParsing="false" text="Redo" />
-                                    <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem mnemonicParsing="false" text="Cut" />
-                                    <MenuItem mnemonicParsing="false" text="Copy" />
-                                    <MenuItem mnemonicParsing="false" text="Paste" />
-                                    <MenuItem mnemonicParsing="false" text="Delete" />
-                                    <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem mnemonicParsing="false" text="Select All" />
-                                    <MenuItem mnemonicParsing="false" text="Unselect All" />
-                                </items>
-                            </Menu>
-                            <Menu mnemonicParsing="false" text="Help">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                                </items>
-                            </Menu>
-                        </menus>
-                    </MenuBar>
-                    <SplitPane dividerPositions="0.19447340980187697" focusTraversable="true" prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
-                        <items>
-                            <AnchorPane prefHeight="1551.0" prefWidth="780.0">
-                                <children>
-                                    <VBox layoutY="97.0" prefHeight="450.0" prefWidth="262.0">
+<AnchorPane prefHeight="1007.0" prefWidth="1920.0" stylesheets="style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
+   <BorderPane layoutY="-4.0" prefHeight="1000.0" prefWidth="1909.0">
+      <left>
+         <VBox prefHeight="964.0" prefWidth="79.0" styleClass="column" stylesheets="@style.css" BorderPane.alignment="CENTER">
+            <children>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="43.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools(7).gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <VBox.margin>
+                     <Insets bottom="80.0" />
+                  </VBox.margin>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="50.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools(8).gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="43.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools(6).gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="43.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools(1).gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="60.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools.gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="43.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/icons8-bookmark.gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="43.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools(5).gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <VBox.margin>
+                     <Insets top="150.0" />
+                  </VBox.margin>
+               </Button>
+               <Button fx:id="logoutButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="55.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Button">
+                  <graphic>
+                     <ImageView fitHeight="43.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@values/output-onlinegiftools(3).gif" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </children>
+         </VBox>
+      </left>
+      <center>
+         <AnchorPane prefHeight="967.0" prefWidth="1656.0" styleClass="secondary-color" stylesheets="style.css" BorderPane.alignment="CENTER">
+            <children>
+               <AnchorPane prefHeight="952.0" prefWidth="1652.0" styleClass="vbox_background_center" stylesheets="@style.css">
+                  <children>
+                        <VBox layoutX="183.0" layoutY="26.0" prefHeight="911.0" prefWidth="1463.0" styleClass="primary-color" stylesheets="@style.css">
+                            <children>
+                                  <ScrollPane prefHeight="935.0" prefWidth="1425.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #0f5243;" styleClass="primary-color" stylesheets="@style.css">
+                                      <content>
+                                 <AnchorPane prefHeight="933.0" prefWidth="1445.0" styleClass="primary-color" stylesheets="@style.css">
+                                    <children>
+                                       <AnchorPane layoutX="-8.0" prefHeight="933.0" prefWidth="1403.0" styleClass="primary-color" stylesheets="@style.css">
+                                          <children>
+                                                      <VBox fx:id="postContainer" alignment="CENTER" layoutX="57.0" layoutY="24.0" prefHeight="815.0" prefWidth="1338.0" spacing="10" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="primary-color" stylesheets="@style.css">
+                                                <AnchorPane prefHeight="780.0" prefWidth="1338.0">
+                                                   <children>
+                                                                <!-- Add VBox to display comments -->
+                                                                <VBox fx:id="commentsContainer" layoutX="185.0" layoutY="20.0" prefHeight="803.0" prefWidth="1030.0" style="-fx-padding: 20;" />
+                                                   </children>
+                                                </AnchorPane>
+                                                      </VBox>
+                                          </children>
+                                       </AnchorPane>
+                                    </children>
+                                 </AnchorPane>
+                                      </content>
+                                  </ScrollPane>
+                            </children>
+                        </VBox>
+                     <VBox prefHeight="954.0" prefWidth="175.0" style="-fx-background-color: #ffffff;">
+                        <children>
+                           <VBox alignment="CENTER" prefHeight="327.0" prefWidth="182.0" style="-fx-background-color: #d0eade;" styleClass="rounded-image" stylesheets="@style.css">
+                              <VBox.margin>
+                                 <Insets />
+                              </VBox.margin>
                               <children>
-                                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" text="Back to All Posts" />
-                                 <Button fx:id="backButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" text="show My Post's" />
-      
-                                    <HBox fx:id="hhh" prefHeight="107.0" prefWidth="1232.0">
-                                        <!-- Add DatePickers for date range search -->
-                                        <DatePicker fx:id="startDatePicker" promptText="Start date" />
-                                        <DatePicker fx:id="endDatePicker" promptText="End date" />
-      
-                                        <!-- Add TextFields for user and location filters -->
-                                        <TextField fx:id="userField" promptText="Filter by user" />
-                                        <TextField fx:id="locationField" promptText="Filter by location" />
-      
-                                        <!-- Add ChoiceBox for sorting options -->
-                                        <ChoiceBox fx:id="sortOptions" prefWidth="150">
-                                            <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                    <String fx:value="Date" />
-                                                    <String fx:value="Likes" />
-                                                    <String fx:value="Title" />
-                                                </FXCollections>
-                                            </items>
-                                            <!-- Set default value -->
-                                            <value>
-                                                <String fx:value="Date" />
-                                            </value>
-                                        </ChoiceBox>
-                                    </HBox>
+                                 <ImageView fx:id="userImageView" fitHeight="135.0" fitWidth="171.0" style="-fx-background-radius: 50;">
+                                    <styleClass>
+                                       <String fx:value="ImageView" />
+                                       <String fx:value="rounded-image" />
+                                    </styleClass>
+                                    <image>
+                                       <Image url="@values/default.png" />
+                                    </image>
+                                 </ImageView>
+                                 <Label fx:id="usernameLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="144.0" textAlignment="CENTER" textFill="#464343">
+                                    <font>
+                                       <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <VBox.margin>
+                                       <Insets top="15.0" />
+                                    </VBox.margin>
+                                 </Label>
                               </children>
-                                    </VBox>
-                                </children>
-                            </AnchorPane>
-                            <ScrollPane prefHeight="1551.0" prefWidth="1101.0">
-                                <content>
-                                    <VBox fx:id="postContainer" alignment="CENTER" prefHeight="882.0" prefWidth="1232.0" spacing="10">
-
-
-
-                                        <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Posts" />
-                                        <!-- Add VBox to display comments -->
-                                        <VBox fx:id="commentsContainer" />
-                                    </VBox>
-                                </content>
-                            </ScrollPane>
-                        </items>
-                    </SplitPane>
-                    <VBox prefHeight="200" prefWidth="100">
-                        <!-- Add VBox to display comments -->
-                    </VBox>
-                    <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1920.0" spacing="5.0" VBox.vgrow="NEVER">
-                        <children>
-                            <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
-                                <font>
-                                    <Font size="11.0" fx:id="x3" />
-                                </font>
-                                <textFill>
-                                    <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-                                </textFill>
-                            </Label>
-                            <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS">
-                        <children>
-                                  <!-- Move the buttons here -->
-
-
-                                        <Button fx:id="previousPageButton" layoutX="643.0" layoutY="-4.0" onAction="#goToPreviousPage" text="Previous Page" />
-                                  <Label fx:id="pageInfoLabel" alignment="CENTER" layoutX="775" prefHeight="17.0" prefWidth="139.0" />
-                                  <Button fx:id="nextPageButton" layoutX="907.0" layoutY="-4.0" onAction="#goToNextPage" text="Next Page" />
-                            <TextField fx:id="searchBar" layoutX="10" layoutY="10" promptText="Search posts" />
-
-                        </children></Pane>
-                            <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+                           </VBox>
+                           <VBox prefHeight="709.0" prefWidth="173.0" styleClass="profile_belowside" stylesheets="@style.css">
+                              <children>
+                                 <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="68.0" prefWidth="230.0" styleClass="selected">
+                                    <children>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@values/update_icon-removebg-preview.png" />
+                                          </image>
+                                       </ImageView>
+                                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" stylesheets="@style.css" text="Back to All Posts" textFill="WHITE">
+                                          <styleClass>
+                                             <String fx:value="display_button" />
+                                             <String fx:value="profile_button" />
+                                          </styleClass>
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font></Button>
+                                    </children>
+                                    <VBox.margin>
+                                       <Insets top="20.0" />
+                                    </VBox.margin>
+                                 </HBox>
+                                 <HBox alignment="CENTER" prefHeight="64.0" prefWidth="230.0" styleClass="selected">
+                                    <children>
+                                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@values/update_icon-removebg-preview.png" />
+                                          </image>
+                                       </ImageView>
+                                       <Button fx:id="backButton1" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" stylesheets="@style.css" text="show My Post's" textFill="WHITE">
+                                          <font>
+                                             <Font size="15.0" />
+                                          </font>
+                                          <styleClass>
+                                             <String fx:value="display_button" />
+                                             <String fx:value="profile_button" />
+                                          </styleClass>
+                                       </Button>
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="74.0" prefWidth="230.0" styleClass="selected">
+                                    <children>
+                                       <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                             <Image url="@values/delete_image-removebg-preview.png" />
+                                          </image>
+                                       </ImageView>
+                                       <Button fx:id="deleteButton1" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" onAction="#showaddpost" text="Add Post" textFill="#fffefe">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font>
+                                          <styleClass>
+                                             <String fx:value="profile_button" />
+                                             <String fx:value="display_button" />
+                                          </styleClass>
+                                       </Button>
+                                    </children>
+                                 </HBox>
+                                 <HBox alignment="CENTER" prefHeight="74.0" prefWidth="182.0" styleClass="selected" />
+                              </children>
+                           </VBox>
                         </children>
-                        <padding>
-                            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                        </padding>
-                    </HBox>
-                </children>
-            </VBox>
-        </content>
-
-
-    </ScrollPane>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+            </children>
+         </AnchorPane>
+      </center>
+      <right>
+         <VBox prefHeight="954.0" prefWidth="188.0">
+            <children>
+               <AnchorPane prefHeight="954.0" prefWidth="202.0" styleClass="profile_belowside" stylesheets="@style.css">
+                  <children>
+                         <!-- Add DatePickers for date range search -->
+                         <DatePicker fx:id="startDatePicker" layoutY="27.0" promptText="Start date" />
+                         <DatePicker fx:id="endDatePicker" layoutY="67.0" promptText="End date" />
+         
+                                                                            <!-- Add TextFields for user and location filters -->
+                         <TextField fx:id="userField" layoutX="1.0" layoutY="108.0" promptText="Filter by user" />
+                         <TextField fx:id="locationField" layoutX="1.0" layoutY="144.0" promptText="Filter by location" />
+         
+                                                                            <!-- Add ChoiceBox for sorting options -->
+                         <ChoiceBox fx:id="sortOptions" layoutX="1.0" layoutY="187.0" prefWidth="150">
+                             <items>
+                                 <FXCollections fx:factory="observableArrayList">
+                                     <String fx:value="Date" />
+                                     <String fx:value="Likes" />
+                                     <String fx:value="Title" />
+                                 </FXCollections>
+                             </items>
+                             <!-- Set default value -->
+                             <value>
+                                 <String fx:value="Date" />
+                             </value>
+                         </ChoiceBox>
+                      <TextField fx:id="searchBar" layoutY="289.0" promptText="Search posts" />
+                  </children>
+               </AnchorPane>
+            </children>
+         </VBox>
+      </right>
+      <bottom>
+         <HBox prefHeight="74.0" prefWidth="1919.0">
+            <children>
+               <AnchorPane prefHeight="57.0" prefWidth="1930.0" styleClass="profile_belowside" stylesheets="@style.css">
+                  <children>
+                            <Button fx:id="nextPageButton" layoutX="1064.0" layoutY="15.0" onAction="#goToNextPage" prefHeight="37.0" prefWidth="71.0" styleClass="login_button" stylesheets="@style.css" text="Next Page" />
+                            <Label fx:id="pageInfoLabel" alignment="CENTER" layoutX="909.0" layoutY="19.0" prefHeight="30.0" prefWidth="139.0" textAlignment="CENTER">
+                        <font>
+                           <Font name="Impact" size="19.0" />
+                        </font></Label>
+                            <!-- Move the buttons here -->
+      
+                                                            
+                                                                                                                <Button fx:id="previousPageButton" layoutX="803.0" layoutY="15.0" onAction="#goToPreviousPage" prefHeight="39.0" prefWidth="91.0" styleClass="login_button" stylesheets="@style.css" text="Previous Page" />
+                  </children>
+               </AnchorPane>
+            </children>
+         </HBox>
+      </bottom>
+   </BorderPane>
 </AnchorPane>
