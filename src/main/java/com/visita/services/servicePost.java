@@ -155,11 +155,15 @@ private     Connection cnx = DataSource.getInstance().getConnection();
             while (rs.next()) {
                 post p = new post();
                 p.setId_post(rs.getInt(1));
-                p.setDescription_post(rs.getString("Description_post"));
-                p.setTitle_post(rs.getString("Title_post"));
-                p.setType_post(rs.getString("Type_post"));
-                p.setDateposted(rs.getString("Dateposted"));
-                p.setImage_post(rs.getString("Image_post"));
+                p.setId_post(rs.getInt("id_post"));
+                p.setDescription_post(rs.getString("description_post"));
+                p.setTitle_post(rs.getString("title_post"));
+                p.setType_post(rs.getString("type_post"));
+                p.setDateposted(rs.getString("dateposted"));
+                p.setImage_post(rs.getString("image_post"));
+                p.setLikes_post(rs.getInt("likes_post"));
+                p.setId_creator(rs.getInt("id_creator"));
+                p.setCountry(rs.getString("country"));
                 posts.add(p);
             }
             System.out.print(posts);
@@ -180,11 +184,15 @@ private     Connection cnx = DataSource.getInstance().getConnection();
             while (rs.next()) {
                 post p = new post();
                 p.setId_post(rs.getInt(1));
-                p.setDescription_post(rs.getString("Description_post"));
-                p.setTitle_post(rs.getString("Title_post"));
-                p.setType_post(rs.getString("Type_post"));
-                p.setDateposted(rs.getString("Dateposted"));
-                p.setImage_post(rs.getString("Image_post"));
+                p.setId_post(rs.getInt("id_post"));
+                p.setDescription_post(rs.getString("description_post"));
+                p.setTitle_post(rs.getString("title_post"));
+                p.setType_post(rs.getString("type_post"));
+                p.setDateposted(rs.getString("dateposted"));
+                p.setImage_post(rs.getString("image_post"));
+                p.setLikes_post(rs.getInt("likes_post"));
+                p.setId_creator(rs.getInt("id_creator"));
+                p.setCountry(rs.getString("country"));
                 posts.add(p);
             }
             System.out.print(posts);
@@ -486,6 +494,97 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         // Return the list of matching posts
         return matchingPosts;
     }
+
+    public List<post> searchAndFilterPosts(String keyword, String startDate, String endDate, String user, String location, String sortBy) {
+        List<post> filteredPosts = new ArrayList<>();
+        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM post WHERE 1=1");
+
+        // Add keyword filter
+        if (keyword != null && !keyword.isEmpty()) {
+            sqlQuery.append(" AND (LOWER(title_post) LIKE ? OR LOWER(description_post) LIKE ?)");
+        }
+
+        // Add date range filter
+        if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
+            sqlQuery.append(" AND Dateposted BETWEEN ? AND ?");
+        }
+
+        // Add user filter
+        if (user != null && !user.isEmpty()) {
+            sqlQuery.append(" AND LOWER(id_creator) = ?");
+        }
+
+        // Add location filter
+        if (location != null && !location.isEmpty()) {
+            sqlQuery.append(" AND LOWER(country) = ?");
+        }
+
+        // Add sorting criteria
+        switch (sortBy != null ? sortBy.toLowerCase() : "") {
+            case "date":
+                sqlQuery.append(" ORDER BY Dateposted DESC");
+                break;
+            case "likes":
+                sqlQuery.append(" ORDER BY likes_post DESC");
+                break;
+            case "title":
+                sqlQuery.append(" ORDER BY title_post ASC");
+                break;
+            default:
+                sqlQuery.append(" ORDER BY Dateposted DESC");
+                break;
+        }
+
+        // Use a PreparedStatement for the query
+        try (PreparedStatement ps = cnx.prepareStatement(sqlQuery.toString())) {
+            // Set the parameters based on the input
+            int parameterIndex = 1;
+
+            if (keyword != null && !keyword.isEmpty()) {
+                ps.setString(parameterIndex++, "%" + keyword.toLowerCase() + "%");
+                ps.setString(parameterIndex++, "%" + keyword.toLowerCase() + "%");
+            }
+
+            if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
+                ps.setDate(parameterIndex++, Date.valueOf(startDate));
+                ps.setDate(parameterIndex++, Date.valueOf(endDate));
+            }
+
+            if (user != null && !user.isEmpty()) {
+                ps.setString(parameterIndex++, user.toLowerCase());
+            }
+
+            if (location != null && !location.isEmpty()) {
+                ps.setString(parameterIndex++, location.toLowerCase());
+            }
+
+            // Execute the query and process the results
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = new post();
+                    // Populate the post object from the result set
+                    p.setId_post(rs.getInt(1));
+                    p.setId_post(rs.getInt("id_post"));
+                    p.setDescription_post(rs.getString("description_post"));
+                    p.setTitle_post(rs.getString("title_post"));
+                    p.setType_post(rs.getString("type_post"));
+                    p.setDateposted(rs.getString("dateposted"));
+                    p.setImage_post(rs.getString("image_post"));
+                    p.setLikes_post(rs.getInt("likes_post"));
+                    p.setId_creator(rs.getInt("id_creator"));
+                    p.setCountry(rs.getString("country"));
+                    // Add the post to the list
+                    filteredPosts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            // Properly handle or log SQL exceptions
+            System.out.println("Error searching and filtering posts: " + ex.getMessage());
+        }
+
+        return filteredPosts;
+    }
+
 
 
 

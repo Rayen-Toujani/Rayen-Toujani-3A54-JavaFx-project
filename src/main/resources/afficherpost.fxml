@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -9,6 +13,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -16,8 +21,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.TextField?>
 <AnchorPane prefHeight="1004.0" prefWidth="1931.0" stylesheets="addpostStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
     <ScrollPane prefHeight="1004.0" prefWidth="1943.0">
         <content>
@@ -70,6 +73,31 @@
                               <children>
                                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" text="Back to All Posts" />
                                  <Button fx:id="backButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" text="show My Post's" />
+      
+                                    <HBox fx:id="hhh" prefHeight="107.0" prefWidth="1232.0">
+                                        <!-- Add DatePickers for date range search -->
+                                        <DatePicker fx:id="startDatePicker" promptText="Start date" />
+                                        <DatePicker fx:id="endDatePicker" promptText="End date" />
+      
+                                        <!-- Add TextFields for user and location filters -->
+                                        <TextField fx:id="userField" promptText="Filter by user" />
+                                        <TextField fx:id="locationField" promptText="Filter by location" />
+      
+                                        <!-- Add ChoiceBox for sorting options -->
+                                        <ChoiceBox fx:id="sortOptions" prefWidth="150">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Date" />
+                                                    <String fx:value="Likes" />
+                                                    <String fx:value="Title" />
+                                                </FXCollections>
+                                            </items>
+                                            <!-- Set default value -->
+                                            <value>
+                                                <String fx:value="Date" />
+                                            </value>
+                                        </ChoiceBox>
+                                    </HBox>
                               </children>
                                     </VBox>
                                 </children>
@@ -77,6 +105,9 @@
                             <ScrollPane prefHeight="1551.0" prefWidth="1101.0">
                                 <content>
                                     <VBox fx:id="postContainer" alignment="CENTER" prefHeight="882.0" prefWidth="1232.0" spacing="10">
+
+
+
                                         <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Posts" />
                                         <!-- Add VBox to display comments -->
                                         <VBox fx:id="commentsContainer" />

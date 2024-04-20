@@ -18,7 +18,10 @@ import com.visita.services.serviceComment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class afficherpost {
 
@@ -49,6 +52,21 @@ public class afficherpost {
     @FXML
     private Label pageInfoLabel;
 
+    @FXML
+    private DatePicker startDatePicker; // DatePicker for start date
+
+    @FXML
+    private DatePicker endDatePicker; // DatePicker for end date
+
+    @FXML
+    private TextField userField; // TextField for user filter
+
+    @FXML
+    private TextField locationField; // TextField for location filter
+
+    @FXML
+    private ChoiceBox<String> sortOptions; // ChoiceBox for sorting options
+
 
     private final servicePost sp = new servicePost();
     private final serviceComment sc = new serviceComment();
@@ -59,6 +77,18 @@ public class afficherpost {
 
 
     public void initialize() {
+
+        // Initialize sorting options
+        sortOptions.getItems().addAll("Date", "Likes");
+        sortOptions.setValue("Date"); // Set default sorting option
+
+        // Add event handler to search bar and other components
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+        startDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+        endDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+        userField.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+        locationField.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+        sortOptions.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> searchPosts());
         // Calculate total number of posts
         totalPosts = sp.countTotalPosts();
 
@@ -73,10 +103,36 @@ public class afficherpost {
 
     @FXML
     private void searchPosts() {
-        String query = searchBar.getText().toLowerCase();
+        // Get the search keyword
+        String keyword = searchBar.getText() != null ? searchBar.getText().toLowerCase() : "";
 
-        List<post> filteredPosts = sp.searchPosts(query);
+        // Get the start date and end date
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
 
+        // Initialize a date formatter to format LocalDate to String
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US);
+
+        // Convert LocalDate to String
+        String startDateStr = startDate != null ? startDate.format(dateFormatter) : null;
+        String endDateStr = endDate != null ? endDate.format(dateFormatter) : null;
+
+        // Get the user and location filters
+        String user = userField.getText() != null ? userField.getText().toLowerCase() : "";
+        String location = locationField.getText() != null ? locationField.getText() : "";
+
+        // Get the sort option
+        String sortBy = sortOptions.getValue();
+
+        // If no sort option is selected, you can provide a default
+        if (sortBy == null) {
+            sortBy = "date";  // Default to sorting by date if no other option is selected
+        }
+
+        // Call the search and filter method and get the filtered posts
+        List<post> filteredPosts = sp.searchAndFilterPosts(keyword, startDateStr, endDateStr, user, location, sortBy);
+
+        // Display the filtered posts
         displayPosts(filteredPosts);
     }
 
@@ -473,10 +529,13 @@ public class afficherpost {
             card.getStyleClass().add("post-card");
             card.setLeft(titleLabel);
             card.setTop(typeLabel);
+            BorderPane.setAlignment(descriptionLabel, Pos.BOTTOM_LEFT);
+
             card.setBottom(descriptionLabel);
             card.setRight(new StackPane(imageView));
 
             BorderPane.setAlignment(likesLabel, Pos.BOTTOM_RIGHT);
+
             card.setBottom(likesLabel);
 
             // Add event handler to show post details when clicked
@@ -501,20 +560,17 @@ public class afficherpost {
     }
 
 
-    private int whereami;
 
     @FXML
     private void backToAllPosts() {
         postContainer.getChildren().clear();
         initialize(); // Reload all posts
-        whereami =1;
     }
 
     @FXML
     private void showUserPostsButtonClicked() {
         // Call the method to display the user's posts
         showUserPosts();
-        whereami =0;
 
     }
 
