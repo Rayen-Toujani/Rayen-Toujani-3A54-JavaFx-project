@@ -27,7 +27,7 @@ import java.util.Locale;
 
 public class afficherpost {
 
-    private int loggedInUserId = 5;
+    private int loggedInUserId = 777;
 
     private int currentPage = 1; // Initialize current page to 1
     private int pageSize = 10; // Set page size to 10 posts per page
@@ -333,9 +333,32 @@ public class afficherpost {
 
     private void updateLikeButtonState(Button likeButton, int postId) {
         if (sp.hasLikedPost(postId, loggedInUserId)) {
-            likeButton.setText("Unlike");
+            //likeButton.setText("Unlike");
+            Image image = new Image("file:/C:/Users/rayen/IdeaProjects/startfromthebottom/secondtryjavapidev/src/main/resources/values/icons8-love-96.png");
+
+            // Create an ImageView from the image
+            ImageView imageView = new ImageView(image);
+
+            // Optionally, set the size of the ImageView
+            imageView.setFitHeight(40);
+            imageView.setFitWidth(40);
+
+            // Set the ImageView as the graphic for the button
+            likeButton.setGraphic(imageView);
         } else {
-            likeButton.setText("Like");
+
+            Image image = new Image("file:/C:/Users/rayen/IdeaProjects/startfromthebottom/secondtryjavapidev/src/main/resources/values/icons8-heart-96.png");
+
+            // Create an ImageView from the image
+            ImageView imageView = new ImageView(image);
+
+            // Optionally, set the size of the ImageView
+            imageView.setFitHeight(40);
+            imageView.setFitWidth(40);
+
+            // Set the ImageView as the graphic for the button
+            likeButton.setGraphic(imageView);
+
         }
     }
 
@@ -408,7 +431,19 @@ public class afficherpost {
                     p.setLikes_post(p.getLikes_post() + 1);
                     likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId()));
                     // Update UI or provide feedback to the user
-                    likeButton.setText("Unlike");
+                   // likeButton.setText("Unlike");
+                    Image image = new Image("file:/C:/Users/rayen/IdeaProjects/startfromthebottom/secondtryjavapidev/src/main/resources/values/icons8-love-96.png");
+
+                    // Create an ImageView from the image
+                    ImageView imageVieww = new ImageView(image);
+
+                    // Optionally, set the size of the ImageView
+                    imageVieww.setFitHeight(40);
+                    imageVieww.setFitWidth(40);
+
+                    // Set the ImageView as the graphic for the button
+                    likeButton.setGraphic(imageVieww);
+
                 }
             } else {
                 // If the user has already liked the post, remove the like
@@ -418,7 +453,17 @@ public class afficherpost {
                     p.setLikes_post(p.getLikes_post() - 1);
                     likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId()));
                     // Update UI or provide feedback to the user
-                    likeButton.setText("Like");
+                    Image image = new Image("file:/C:/Users/rayen/IdeaProjects/startfromthebottom/secondtryjavapidev/src/main/resources/values/icons8-heart-96.png");
+
+                    // Create an ImageView from the image
+                    ImageView imageVieww = new ImageView(image);
+
+                    // Optionally, set the size of the ImageView
+                    imageVieww.setFitHeight(40);
+                    imageVieww.setFitWidth(40);
+
+                    // Set the ImageView as the graphic for the button
+                    likeButton.setGraphic(imageVieww);
                 }
             }
         });
