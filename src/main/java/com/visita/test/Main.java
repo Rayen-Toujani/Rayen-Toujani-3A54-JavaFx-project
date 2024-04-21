@@ -27,9 +27,10 @@ public class Main {
         //posttomodify.setDescription_post("New Description");
         //posttomodify.setImage_post("New Image");
         //ps.modifier(posttomodify);
-        ps.afficher();
+        //ps.afficher();
 
         serviceComment cs = new serviceComment();
+        System.out.println(cs.afficherall());
         //comment newComment = new comment(1,77,"azea","nicce post");
         //cs.ajouter(newComment);
         //cs.Supprimer(134);
