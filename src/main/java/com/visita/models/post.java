@@ -11,7 +11,7 @@ public class post {
 
     private int id;
 
-    private String title_post,contenu_post ,type_post,Image_post;
+    private String title_post,contenu_post,type_post,Image_post;
 
     private String makedate_post , country;
 

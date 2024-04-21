@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="1010.0" prefWidth="1920.0" stylesheets="@dashboardDesign.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.Backpost">
+   <children>
+      <StackPane layoutX="2.0" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1010.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="root" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <BorderPane prefHeight="1010.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <left>
+                        <AnchorPane BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox layoutY="13.0" prefHeight="541.0" prefWidth="230.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="143.0" prefWidth="230.0">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <children>
+                                          <ImageView fx:id="userImageView" fitHeight="100" fitWidth="100" styleClass="image-view">
+                                             <image>
+                                                <Image url="@values/default.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="103.0" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="15.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="shadow" />
+                                          <String fx:value="nav-form" />
+                                       </styleClass>
+                                    </VBox>
+                                    <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="857.0" prefWidth="230.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="68.0" prefWidth="230.0" styleClass="selected" stylesheets="style.css">
+                                             <children>
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@values/update_icon-removebg-preview.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Button fx:id="profileButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="nav-btn" text="Profile" textFill="#fffdfd" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="68.0" prefWidth="182.0">
+                                             <children>
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@values/view-removebg-preview.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <MenuButton fx:id="TableViewId" mnemonicParsing="false" prefHeight="30.0" prefWidth="118.0" styleClass="nav-btn" text="Profile" textFill="#fffdfd">
+                                                   <items>
+                                                      <MenuItem text="Show User" />
+                                                      <MenuItem text="Show Doctor" />
+                                                      <MenuItem text="Show Admin" />
+                                                   </items>
+                                                </MenuButton>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="69.0" prefWidth="230.0" styleClass="selected" stylesheets="style.css">
+                                             <children>
+                                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@values/update_icon-removebg-preview.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Button fx:id="modifyButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" styleClass="nav-btn" text="Modify Account" textFill="#fffdfd" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="74.0" prefWidth="230.0" styleClass="selected" stylesheets="style.css">
+                                             <children>
+                                                <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@values/delete_image-removebg-preview.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" styleClass="nav-btn" text="Delete Account" textFill="#fffefe" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="74.0" prefWidth="230.0" styleClass="selected" stylesheets="style.css">
+                                             <children>
+                                                <ImageView fitHeight="36.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@values/logout-removebg-preview.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Button fx:id="logoutButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" styleClass="nav-btn" text="Logout" textFill="#fffefe" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="nav-form" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </VBox>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="nav-form" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                              </VBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="nav-form" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </AnchorPane>
+                     </left>
+                     <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <AnchorPane layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1010.0" prefWidth="1690.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane layoutY="-14.0" prefHeight="1010.0" prefWidth="1690.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <VBox layoutY="1.0" prefHeight="1010.0" prefWidth="1690.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="92.0" prefWidth="886.0">
+                                                   <children>
+                                                      <Label prefHeight="86.0" prefWidth="250.0" text="Profile Settings" textFill="#383737">
+                                                         <font>
+                                                            <Font name="System Bold" size="25.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets bottom="30.0" right="50.0" top="20.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <Pane prefHeight="86.0" prefWidth="210.0" />
+                                                      <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@values/update_icon-removebg-preview.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Button fx:id="showcommntbttn" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="add-btn" text="Show Comments" textFill="#fffdfd" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox>
+                                                   <VBox.margin>
+                                                      <Insets left="40.0" />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Label prefHeight="98.0" prefWidth="496.0" text="User List" textFill="#383737">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets bottom="30.0" right="50.0" top="20.0" />
+                                                         </padding>
+                                                      </Label>
+                                                      <Button fx:id="pdfButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" styleClass="update-btn" text="PDF" textFill="WHITE">
+                                                         <HBox.margin>
+                                                            <Insets right="20.0" top="30.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                      <ImageView fitHeight="39.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@values/search.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets top="20.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <TextField fx:id="searchButton" prefHeight="26.0" prefWidth="184.0" style="-fx-background-radius: 50;">
+                                                         <HBox.margin>
+                                                            <Insets right="20.0" top="30.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <AnchorPane prefHeight="728.0" prefWidth="1690.0">
+                                                   <children>
+                                                      <TableView fx:id="tableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1690.0" style="-fx-alignment: center;">
+                                                         <columns>
+                                                            <TableColumn fx:id="titleColumn" prefWidth="334.0" style="-fx-alignment: center;" text="Title" />
+                                                            <TableColumn fx:id="typeColumn" prefWidth="299.0" style="-fx-alignment: center;" text="Type" />
+                                                            <TableColumn fx:id="dateColumn" prefWidth="313.0" style="-fx-alignment: center;" text="Date" />
+                                                            <TableColumn fx:id="imageColumn" prefWidth="313.0" style="-fx-alignment: center;" text="Image" />
+                                                            <TableColumn fx:id="countryColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Country" />
+                                                            <TableColumn fx:id="descriptionColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Description" />
+                                                            <TableColumn fx:id="deleteColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Delete" />
+                                                         </columns>
+                                                      </TableView>
+
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                             <styleClass>
+                                                <String fx:value="shadow" />
+                                                <String fx:value="white-bg" />
+                                             </styleClass>
+                                          </VBox>
+                                       </children>
+                                       <styleClass>
+                                          <String fx:value="white-bg" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                    </AnchorPane>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
