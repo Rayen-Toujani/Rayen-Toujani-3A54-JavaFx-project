@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,8 +18,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1007.0" prefWidth="1920.0" stylesheets="style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
-   <BorderPane layoutY="-4.0" prefHeight="1000.0" prefWidth="1909.0">
+<AnchorPane prefHeight="1007.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
+   <BorderPane fx:id="parent" layoutY="-4.0" prefHeight="1000.0" prefWidth="1909.0" stylesheets="@style.css">
       <left>
          <VBox prefHeight="964.0" prefWidth="79.0" styleClass="column" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
@@ -104,19 +105,19 @@
          </VBox>
       </left>
       <center>
-         <AnchorPane prefHeight="967.0" prefWidth="1656.0" styleClass="secondary-color" stylesheets="style.css" BorderPane.alignment="CENTER">
+         <AnchorPane prefHeight="967.0" prefWidth="1656.0" styleClass="secondary-color" stylesheets="@style.css" BorderPane.alignment="CENTER">
             <children>
-               <AnchorPane prefHeight="952.0" prefWidth="1652.0" styleClass="vbox_background_center" stylesheets="@style.css">
+               <AnchorPane prefHeight="952.0" prefWidth="1652.0" styleClass="vbox_background_center">
                   <children>
-                        <VBox layoutX="183.0" layoutY="26.0" prefHeight="911.0" prefWidth="1463.0" styleClass="primary-color" stylesheets="@style.css">
+                        <VBox layoutX="183.0" layoutY="26.0" prefHeight="911.0" prefWidth="1463.0" styleClass="primary-color">
                             <children>
-                                  <ScrollPane prefHeight="935.0" prefWidth="1425.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #0f5243;" styleClass="primary-color" stylesheets="@style.css">
+                                  <ScrollPane prefHeight="935.0" prefWidth="1425.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #0f5243;" styleClass="primary-color">
                                       <content>
-                                 <AnchorPane prefHeight="933.0" prefWidth="1445.0" styleClass="primary-color" stylesheets="@style.css">
+                                 <AnchorPane prefHeight="933.0" prefWidth="1445.0" styleClass="primary-color">
                                     <children>
-                                       <AnchorPane layoutX="-8.0" prefHeight="933.0" prefWidth="1403.0" styleClass="primary-color" stylesheets="@style.css">
+                                       <AnchorPane layoutX="-8.0" prefHeight="933.0" prefWidth="1403.0" styleClass="primary-color">
                                           <children>
-                                                      <VBox fx:id="postContainer" alignment="CENTER" layoutX="57.0" layoutY="24.0" prefHeight="815.0" prefWidth="1338.0" spacing="10" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="primary-color" stylesheets="@style.css">
+                                                      <VBox fx:id="postContainer" alignment="CENTER" layoutX="57.0" layoutY="24.0" prefHeight="815.0" prefWidth="1338.0" spacing="10" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="primary-color">
                                                 <AnchorPane prefHeight="780.0" prefWidth="1338.0">
                                                    <children>
                                                                 <!-- Add VBox to display comments -->
@@ -134,7 +135,7 @@
                         </VBox>
                      <VBox prefHeight="954.0" prefWidth="175.0" style="-fx-background-color: #ffffff;">
                         <children>
-                           <VBox alignment="CENTER" prefHeight="327.0" prefWidth="182.0" style="-fx-background-color: #d0eade;" styleClass="rounded-image" stylesheets="@style.css">
+                           <VBox alignment="CENTER" prefHeight="327.0" prefWidth="182.0" style="-fx-background-color: #d0eade;" styleClass="rounded-image">
                               <VBox.margin>
                                  <Insets />
                               </VBox.margin>
@@ -158,7 +159,7 @@
                                  </Label>
                               </children>
                            </VBox>
-                           <VBox prefHeight="709.0" prefWidth="173.0" styleClass="profile_belowside" stylesheets="@style.css">
+                           <VBox prefHeight="709.0" prefWidth="173.0" styleClass="profile_belowside">
                               <children>
                                  <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="68.0" prefWidth="230.0" styleClass="selected">
                                     <children>
@@ -167,7 +168,7 @@
                                              <Image url="@values/update_icon-removebg-preview.png" />
                                           </image>
                                        </ImageView>
-                                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" stylesheets="@style.css" text="Back to All Posts" textFill="WHITE">
+                                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToAllPosts" prefHeight="25.0" prefWidth="265.0" text="Back to All Posts" textFill="WHITE">
                                           <styleClass>
                                              <String fx:value="display_button" />
                                              <String fx:value="profile_button" />
@@ -187,7 +188,7 @@
                                              <Image url="@values/update_icon-removebg-preview.png" />
                                           </image>
                                        </ImageView>
-                                       <Button fx:id="backButton1" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" stylesheets="@style.css" text="show My Post's" textFill="WHITE">
+                                       <Button fx:id="backButton1" mnemonicParsing="false" onAction="#showUserPostsButtonClicked" prefHeight="25.0" prefWidth="265.0" text="show My Post's" textFill="WHITE">
                                           <font>
                                              <Font size="15.0" />
                                           </font>
@@ -205,7 +206,7 @@
                                              <Image url="@values/delete_image-removebg-preview.png" />
                                           </image>
                                        </ImageView>
-                                       <Button fx:id="deleteButton1" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" onAction="#showaddpost" text="Add Post" textFill="#fffefe">
+                                       <Button fx:id="deleteButton1" mnemonicParsing="false" onAction="#showaddpost" prefHeight="30.0" prefWidth="128.0" text="Add Post" textFill="#fffefe">
                                           <font>
                                              <Font size="14.0" />
                                           </font>
@@ -229,7 +230,7 @@
       <right>
          <VBox prefHeight="954.0" prefWidth="188.0">
             <children>
-               <AnchorPane prefHeight="954.0" prefWidth="202.0" styleClass="profile_belowside" stylesheets="@style.css">
+               <AnchorPane prefHeight="954.0" prefWidth="202.0" styleClass="profile_belowside">
                   <children>
                          <!-- Add DatePickers for date range search -->
                          <DatePicker fx:id="startDatePicker" layoutY="27.0" promptText="Start date" />
@@ -254,6 +255,14 @@
                              </value>
                          </ChoiceBox>
                       <TextField fx:id="searchBar" layoutY="289.0" promptText="Search posts" />
+                     <ToggleButton fx:id="modeToggleButton" layoutX="32.0" layoutY="373.0" mnemonicParsing="false" onAction="#changemode">
+                        <graphic>
+                           <ImageView fx:id="img_mode" fitHeight="91.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@values/icons8-moon-100.png" />
+                              </image>
+                           </ImageView>
+                        </graphic></ToggleButton>
                   </children>
                </AnchorPane>
             </children>
@@ -262,9 +271,9 @@
       <bottom>
          <HBox prefHeight="74.0" prefWidth="1919.0">
             <children>
-               <AnchorPane prefHeight="57.0" prefWidth="1930.0" styleClass="profile_belowside" stylesheets="@style.css">
+               <AnchorPane prefHeight="57.0" prefWidth="1930.0" styleClass="profile_belowside">
                   <children>
-                            <Button fx:id="nextPageButton" layoutX="1064.0" layoutY="15.0" onAction="#goToNextPage" prefHeight="37.0" prefWidth="71.0" styleClass="login_button" stylesheets="@style.css" text="Next Page" />
+                            <Button fx:id="nextPageButton" layoutX="1064.0" layoutY="15.0" onAction="#goToNextPage" prefHeight="37.0" prefWidth="71.0" styleClass="login_button" text="Next Page" />
                             <Label fx:id="pageInfoLabel" alignment="CENTER" layoutX="909.0" layoutY="19.0" prefHeight="30.0" prefWidth="139.0" textAlignment="CENTER">
                         <font>
                            <Font name="Impact" size="19.0" />
@@ -272,7 +281,7 @@
                             <!-- Move the buttons here -->
       
                                                             
-                                                                                                                <Button fx:id="previousPageButton" layoutX="803.0" layoutY="15.0" onAction="#goToPreviousPage" prefHeight="39.0" prefWidth="91.0" styleClass="login_button" stylesheets="@style.css" text="Previous Page" />
+                                                                                                                <Button fx:id="previousPageButton" layoutX="803.0" layoutY="15.0" onAction="#goToPreviousPage" prefHeight="39.0" prefWidth="91.0" styleClass="login_button" text="Previous Page" />
                   </children>
                </AnchorPane>
             </children>

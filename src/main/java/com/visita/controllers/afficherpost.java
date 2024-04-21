@@ -2,6 +2,7 @@ package com.visita.controllers;
 
 import com.visita.models.post;
 import com.visita.models.comment;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -15,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import com.visita.services.servicePost;
 import com.visita.services.serviceComment;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +42,8 @@ public class afficherpost {
 
     @FXML
     private TextField searchBar;
+    @FXML
+    private BorderPane parent;
 
 
 
@@ -67,6 +71,9 @@ public class afficherpost {
     @FXML
     private ChoiceBox<String> sortOptions; // ChoiceBox for sorting options
 
+    @FXML
+    private ToggleButton changemodebtn;
+
 
     private final servicePost sp = new servicePost();
     private final serviceComment sc = new serviceComment();
@@ -74,9 +81,65 @@ public class afficherpost {
 
     private int test=0;
 
+    @FXML
+    private ToggleButton modeToggleButton;
+    @FXML
+    private ImageView img_mode;
+
+
+
+    private boolean isLightMode = true;
+
+    public void changemode(ActionEvent event){
+        isLightMode= !isLightMode;
+        if (isLightMode){
+            setLightMode();
+        }else {
+            setDarkMode();
+        }
+    }
+
+
+    private void setLightMode() {
+        parent.getStylesheets().remove("dark.css");
+        parent.getStylesheets().add("style.css");
+
+        try {
+            Image image = new Image("file:/C:/Users/rayen/IdeaProjects/startfromthebottom/secondtryjavapidev/src/main/resources/values/icons8-moon-100.png");
+            img_mode.setImage(image);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Image not found: " + e.getMessage());
+            // Handle error: set a default image or show an error message
+        }
+    }
+
+    private void setDarkMode() {
+        parent.getStylesheets().remove("style.css");
+        parent.getStylesheets().add("dark.css");
+
+        try {
+            Image image = new Image("file:/C:/Users/rayen/IdeaProjects/startfromthebottom/secondtryjavapidev/src/main/resources/values/icons8-sun-100.png");
+            img_mode.setImage(image);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Image not found: " + e.getMessage());
+            // Handle error: set a default image or show an error message
+        }
+    }
+
+
+
+
 
 
     public void initialize() {
+
+        modeToggleButton.getStyleClass().add("toggle-switch");
+
+
+
+
+
+
 
 
 
@@ -103,7 +166,14 @@ public class afficherpost {
         loadPosts(currentPage);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
+
+
+
     }
+
+
+
+
 
     @FXML
     private void searchPosts() {
@@ -313,6 +383,7 @@ public class afficherpost {
         // Replace this with your desired input area implementation
         TextArea commentInput = new TextArea();
         Button addCommentButton = new Button("Add Comment");
+        addCommentButton.getStyleClass().add("login_button");
         addCommentButton.setOnAction(event -> {
             String newCommentText = commentInput.getText();
             // Filter the new comment
@@ -407,6 +478,7 @@ public class afficherpost {
         // Replace this with your desired input area implementation
         TextArea commentInput = new TextArea();
         Button addCommentButton = new Button("Add Comment");
+        addCommentButton.getStyleClass().add("login_button");
         addCommentButton.setOnAction(event -> {
             String newCommentText = commentInput.getText();
             // Add new comment logic here
@@ -428,6 +500,7 @@ public class afficherpost {
         // Assuming you have a constant image path
 
         Button deleteButton = new Button("Delete Post");
+        deleteButton.getStyleClass().add("login_button");
         deleteButton.setOnAction(event -> {
             // Delete the post logic here
             sp.Supprimer(p.getId()); // Replace deletePost with your actual method
@@ -437,6 +510,7 @@ public class afficherpost {
         });
 
         Button modifyButton = new Button("Modify Post");
+        modifyButton.getStyleClass().add("login_button");
         modifyButton.setOnAction(event -> {
             // Handle modify button click event
             // Open a window or dialog for modifying the post details
@@ -580,8 +654,11 @@ public class afficherpost {
 
             // Add the VBox containing the card and delete button to the postContainer
             postContainer.getChildren().add(postWithDeleteButton);
+
+
         }
     }
+
 
 
 

@@ -1,14 +1,14 @@
 .profile-layout {
-    -fx-background-color: #EBC95E;
+    -fx-background-color: #2f2813;
     -fx-background-radius: 0 0 50 50;
 }
 
 .primary-color {
-    -fx-background-color: #5cb78f;
+    -fx-background-color: #193126;
 }
 
 .secondary-color {
-    -fx-background-color: #f2f5dc;
+    -fx-background-color: #2b2c27;
 }
 
 .button {
@@ -19,16 +19,16 @@
 }
 
 .profile_button {
-    -fx-background-color: #d7b77b;
+    -fx-background-color: #3d3424;
 }
 
 .selected-border {
-    -fx-border-color: #ffff;
+    -fx-border-color: #2d2d2d;
     -fx-border-width: 0 3 0 0;
 }
 
 .selected:hover {
-    -fx-background-color: #b9b7b7;
+    -fx-background-color: #333232;
 }
 
 .image-view {
@@ -36,7 +36,7 @@
 }
 
 .display_button:hover {
-    -fx-background-color: #d39d50;
+    -fx-background-color: #332614;
 }
 
 .cursor_hand {
@@ -45,6 +45,17 @@
 
 .rounded-image {
     -fx-clip-shape: circle;
+}
+
+
+.title-label,
+.type-label,
+.description-label,
+.likes-label,
+.country-label,
+.date-label{
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #ffff; /* Text color for light mode (dark gray) */
 }
 
 .tableView {
@@ -59,37 +70,23 @@
     -fx-background-image: url("values/greenn.jpg");
 }
 
-/* Define variables for light and dark colors */
-
-.toggle-switch{
-    -fx-background-color: #ffff;
-    -fx-background-radius: 100;
-}
-
-
-
-
-
-.title-label,
-.type-label,
-.description-label,
-.likes-label,
-.country-label,
-.date-label {
-    -fx-font-size: 14px; /* Font size */
-    -fx-text-fill: #333; /* Text color for light mode (dark gray) */
-}
-
 .vbox_background_rightsignup {
     -fx-background-image: url("values/signuppp.jpg");
 }
 
 .login_button {
-    -fx-background-color: #ed6637;
+    -fx-background-color: #72311b;
+    -fx-text-fill: #ffff;
+}
+
+.toggle-switch{
+    -fx-background-color: #383838;
+    -fx-background-radius: 100;
 }
 
 .login_button:hover {
-    -fx-background-color: #d39d50;
+    -fx-background-color: #362915;
+    -fx-text-fill: #ffff;
 }
 
 .signup_button {
@@ -97,11 +94,11 @@
 }
 
 .signup_button:hover {
-    -fx-background-color: #ed6637;
+    -fx-background-color: #421d10;
 }
 
 .doctor_button:hover {
-    -fx-background-color: #3d8cb0;
+    -fx-background-color: #132b36;
 }
 
 .affichage_profile {
@@ -109,7 +106,7 @@
 }
 
 .affichage_profile_layout {
-    -fx-background-color: #0f5243;
+    -fx-background-color: #082c24;
 }
 
 /* Example CSS rule that sets the minimum width of all TableView columns */
@@ -118,26 +115,26 @@
 }
 
 .chosen_profile {
-    -fx-background-color: #75b7a1;
+    -fx-background-color: #2e483f;
     -fx-background-radius: 50 50 50 50;
     -fx-border-radius: 50;
 }
 
 .profile_side {
-    -fx-background-color: #ace5cd;
+    -fx-background-color: #33483f;
 }
 
 .profile_belowside {
-    -fx-background-color: #d0eade;
+    -fx-background-color: #33483f;
 }
 
 .doctor-list {
-    -fx-background-color: white; /* Set the background color to white */
+    -fx-background-color: #362c2c; /* Set the background color to white */
 }
 
 /* Style for each doctor card */
 .doctor-card {
-    -fx-background-color: lightgray; /* Set the default background color for all cards */
+    -fx-background-color: #423a3a; /* Set the default background color for all cards */
     -fx-background-radius: 50; /* Set the background radius */
     -fx-padding: 10px; /* Add padding for spacing */
 }
@@ -148,8 +145,8 @@
 .post-card {
     -fx-padding: 15 50 15 50; /* Padding inside the card */
     -fx-border-radius: 8; /* Border radius for rounded corners */
-    -fx-background-color: #f0f0f0; /* Background color */
-    -fx-border-color: #ccc; /* Border color */
+    -fx-background-color: #2a2828; /* Background color */
+    -fx-border-color: #312f2f; /* Border color */
     -fx-border-width: 1; /* Border width */
     -fx-background-radius: 8; /* Background radius for rounded corners */
     -fx-pref-width: 300; /* Preferred width of the card (adjust as needed) */
@@ -161,7 +158,7 @@
 
 
 .post-card:hover {
-    -fx-background-color: #adfa93; /* White */
-    -fx-border-color: #54ad43; /* Light gray */
+    -fx-background-color: #0f2d05; /* White */
+    -fx-border-color: #1b3617; /* Light gray */
 }
 
