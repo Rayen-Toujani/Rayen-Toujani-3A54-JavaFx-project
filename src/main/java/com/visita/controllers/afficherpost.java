@@ -25,7 +25,7 @@ import java.util.Locale;
 
 public class afficherpost {
 
-    private int loggedInUserId = 777;
+    private int loggedInUserId = 5;
 
     private int currentPage = 1; // Initialize current page to 1
     private int pageSize = 10; // Set page size to 10 posts per page
@@ -72,16 +72,20 @@ public class afficherpost {
     private final serviceComment sc = new serviceComment();
 
 
-
+    private int test=0;
 
 
 
     public void initialize() {
 
-        // Initialize sorting options
-        sortOptions.getItems().addAll("Date", "Likes");
-        sortOptions.setValue("Date"); // Set default sorting option
 
+
+        if (test==0) {
+            // Initialize sorting options
+            sortOptions.getItems().addAll();
+        test=1;
+        }
+            sortOptions.setValue("Date"); // Set default sorting option
         // Add event handler to search bar and other components
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
         startDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> searchPosts());
@@ -200,6 +204,8 @@ public class afficherpost {
 
     private void displayPosts(List<post> posts) {
 
+        System.out.println(sp.countLikesForPost(77));
+
         postContainer.getChildren().clear();
         // Iterate through the list of posts and display each one
         for (post p : posts) {
@@ -208,16 +214,16 @@ public class afficherpost {
             titleLabel.getStyleClass().add("title-label");
             Label typeLabel = new Label("Type: " + p.getType_post());
             typeLabel.getStyleClass().add("type-label");
-            Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+            Label descriptionLabel = new Label("Description: " + p.getContenu_post());
             descriptionLabel.getStyleClass().add("description-label");
 
             // Create additional labels for date posted and country
-            Label dateLabel = new Label("Date: " + p.getDateposted());
+            Label dateLabel = new Label("Date: " + p.getMakedate_post());
             dateLabel.getStyleClass().add("date-label");
             Label countryLabel = new Label("Country: " + p.getCountry());
             countryLabel.getStyleClass().add("country-label");
 
-            Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+            Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId()));
             likesLabel.getStyleClass().add("likes-label");
 
             // Create an ImageView for displaying the image
@@ -266,6 +272,7 @@ public class afficherpost {
 
     private void showPostDetails(post p) {
         // Clear postContainer to remove previous post details
+        System.out.println(p.getId());
         postContainer.getChildren().clear();
 
         // Create labels for title, type, and description
@@ -273,11 +280,11 @@ public class afficherpost {
         titleLabel.getStyleClass().add("title-label");
         Label typeLabel = new Label("Type: " + p.getType_post());
         typeLabel.getStyleClass().add("type-label");
-        Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+        Label descriptionLabel = new Label("Description: " + p.getContenu_post());
         descriptionLabel.getStyleClass().add("description-label");
 
         // Create a label to display the number of likes
-        Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+        Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId()));
         likesLabel.getStyleClass().add("likes-label");
 
         // Create an ImageView for displaying the image
@@ -291,12 +298,12 @@ public class afficherpost {
         postDetails.setSpacing(10); // Add spacing between components
 
         // Fetch comments for the selected post
-        List<comment> comments = sc.affichersingle(p.getId_post());
+        List<comment> comments = sc.affichersingle(p.getId());
 
         // Display comments
         VBox commentsContainer = new VBox();
         for (comment c : comments) {
-            Label commentLabel = new Label("Comment: " + c.getComment());
+            Label commentLabel = new Label("Comment: " + c.getContenu_comment());
             commentsContainer.getChildren().add(commentLabel);
         }
 
@@ -311,7 +318,7 @@ public class afficherpost {
             // Filter the new comment
             newCommentText = CommentFilter.filterComment(newCommentText);
             // Add new comment logic here
-            sc.ajouter(new comment(1, p.getId_post(), "aaa", newCommentText));
+            sc.ajouter(new comment(1,p.getId(),"azea",newCommentText));
             showPostDetails(p);
         });
 
@@ -319,26 +326,26 @@ public class afficherpost {
 
         // Like Button
         Button likeButton = new Button();
-        updateLikeButtonState(likeButton, p.getId_post());
+        updateLikeButtonState(likeButton, p.getId());
 
         likeButton.setOnAction(event -> {
-            if (!sp.hasLikedPost(p.getId_post(), loggedInUserId)) {
+            if (!sp.hasLikedPost(p.getId(), loggedInUserId)) {
                 // If the user hasn't liked the post yet, add a like
-                boolean success = sp.addLike(p.getId_post(), loggedInUserId);
+                boolean success = sp.addLike(p.getId(), loggedInUserId);
                 if (success) {
                     // Update the likes count and label
                     p.setLikes_post(p.getLikes_post() + 1);
-                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Unlike");
                 }
             } else {
                 // If the user has already liked the post, remove the like
-                boolean success = sp.removeLike(p.getId_post(), loggedInUserId);
+                boolean success = sp.removeLike(p.getId(), loggedInUserId);
                 if (success) {
                     // Update the likes count and label
                     p.setLikes_post(p.getLikes_post() - 1);
-                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Like");
                 }
@@ -357,7 +364,7 @@ public class afficherpost {
     private void showPostDetailsuser(post p) {
         // Clear postContainer to remove previous post details
 
-
+        System.out.println("\n" +p.getId());
 
         postContainer.getChildren().clear();
 
@@ -366,11 +373,11 @@ public class afficherpost {
         titleLabel.getStyleClass().add("title-label");
         Label typeLabel = new Label("Type: " + p.getType_post());
         typeLabel.getStyleClass().add("type-label");
-        Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+        Label descriptionLabel = new Label("Description: " + p.getContenu_post());
         descriptionLabel.getStyleClass().add("description-label");
 
 
-        Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+        Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId()));
         likesLabel.getStyleClass().add("likes-label");
 
 
@@ -385,13 +392,13 @@ public class afficherpost {
         postDetails.setSpacing(10); // Add spacing between components
 
         // Fetch comments for the selected post
-        List<comment> comments = sc.affichersingle(p.getId_post());
+        List<comment> comments = sc.affichersingle(p.getId());
 
         // Display comments
         VBox commentsContainer = new VBox();
         for (comment c : comments) {
 
-            Label commentLabel = new Label("Comment: " + c.getComment());
+            Label commentLabel = new Label("Comment: " + c.getContenu_comment());
             commentsContainer.getChildren().add(commentLabel);
 
         }
@@ -403,7 +410,7 @@ public class afficherpost {
         addCommentButton.setOnAction(event -> {
             String newCommentText = commentInput.getText();
             // Add new comment logic here
-            sc.ajouter(new comment(1,p.getId_post(),"aaa",newCommentText));
+            sc.ajouter(new comment(1, p.getId(), "aaa",newCommentText));
             showPostDetails(p);
 
         });
@@ -423,7 +430,8 @@ public class afficherpost {
         Button deleteButton = new Button("Delete Post");
         deleteButton.setOnAction(event -> {
             // Delete the post logic here
-            sp.Supprimer(p.getId_post()); // Replace deletePost with your actual method
+            sp.Supprimer(p.getId()); // Replace deletePost with your actual method
+            System.out.println(p.getId());
             // Refresh posts after deletion
             showUserPosts();
         });
@@ -467,18 +475,18 @@ public class afficherpost {
 
         // Like Button
         Button likeButton = new Button();
-        updateLikeButtonState(likeButton, p.getId_post());
+        updateLikeButtonState(likeButton, p.getId());
 
         likeButton.setOnAction(event -> {
-            if (!sp.hasLikedPost(p.getId_post(), loggedInUserId)) {
+            if (!sp.hasLikedPost(p.getId(), loggedInUserId)) {
                 // If the user hasn't liked the post yet, add a like
-                boolean success = sp.addLike(p.getId_post(), loggedInUserId);
+                boolean success = sp.addLike(p.getId(), loggedInUserId);
                 if (success) {
 
 
 
                     p.setLikes_post(p.getLikes_post() + 1);
-                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Unlike");
 
@@ -488,13 +496,13 @@ public class afficherpost {
                 }
             } else {
                 // If the user has already liked the post, remove the like
-                boolean success = sp.removeLike(p.getId_post(), loggedInUserId);
+                boolean success = sp.removeLike(p.getId(), loggedInUserId);
                 if (success) {
 
 
 
                     p.setLikes_post(p.getLikes_post() - 1);
-                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId_post()));
+                    likesLabel.setText("Likes: " + sp.countLikesForPost(p.getId()));
                     // Update UI or provide feedback to the user
                     likeButton.setText("Like");
 
@@ -519,6 +527,7 @@ public class afficherpost {
         // Example: Load posts by the logged-in user from a database or other source
         List<post> userPosts = sp.afficheruserpost(loggedInUserId); // Replace getPostsByUser with your actual method
 
+
         // Clear postContainer to remove previous post details
         postContainer.getChildren().clear();
 
@@ -528,9 +537,9 @@ public class afficherpost {
             titleLabel.getStyleClass().add("title-label");
             Label typeLabel = new Label("Type: " + p.getType_post());
             typeLabel.getStyleClass().add("type-label");
-            Label descriptionLabel = new Label("Description: " + p.getDescription_post());
+            Label descriptionLabel = new Label("Description: " + p.getContenu_post());
             descriptionLabel.getStyleClass().add("description-label");
-            Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId_post()));
+            Label likesLabel = new Label("Likes: " + sp.countLikesForPost(p.getId()));
             likesLabel.getStyleClass().add("likes-label");
 
 
@@ -560,7 +569,7 @@ public class afficherpost {
             Button deleteButton = new Button("Delete Post");
             deleteButton.setOnAction(event -> {
                 // Delete the post logic here
-                sp.Supprimer(p.getId_post()); // Replace deletePost with your actual method
+                sp.Supprimer(p.getId()); // Replace deletePost with your actual method
                 // Refresh posts after deletion
                 showUserPosts();
             });

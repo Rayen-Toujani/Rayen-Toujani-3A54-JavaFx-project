@@ -29,8 +29,8 @@ public class Main {
         //ps.modifier(posttomodify);
         ps.afficher();
 
-        //serviceComment cs = new serviceComment();
-       // comment newComment = new comment(1,81,"azea","nicce post");
+        serviceComment cs = new serviceComment();
+        //comment newComment = new comment(1,77,"azea","nicce post");
         //cs.ajouter(newComment);
         //cs.Supprimer(134);
 

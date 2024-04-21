@@ -43,7 +43,7 @@ public class modifypost {
         // Initialize text fields with current post details
         currentPost = p;
         modifyPostTitleField.setText(p.getTitle_post());
-        modifyPostDescriptionArea.setText(p.getDescription_post());
+        modifyPostDescriptionArea.setText(p.getContenu_post());
         // Populate other fields as needed
         // For example, if you have a choice box for post type:
         modifyPostTypeChoice.setValue(p.getType_post());
@@ -83,7 +83,7 @@ public class modifypost {
         // Update the currentPost object with modified details
         currentPost.setTitle_post(modifiedTitle);
         currentPost.setType_post(modifiedType);
-        currentPost.setDescription_post(modifiedDescription);
+        currentPost.setContenu_post(modifiedDescription);
 
 
 

@@ -3,60 +3,74 @@ import java.lang.*;
 
 public class post {
 
-    private int id_post , likes_post, id_creator;
+    private int id_post;
+    private int likes_post;
+    private int id_creator;
 
-    private String Title_post,Description_post,Type_post,Image_post;
 
-    private String Dateposted , country;
+
+    private int id;
+
+    private String title_post,contenu_post ,type_post,Image_post;
+
+    private String makedate_post , country;
 
 
     public post() {
     }
 
-    public post(int id_post, int likes_post, int id_creator, String title_post, String description_post, String type_post, String image_post, String dateposted, String country) {
+    public post(int id_post, int likes_post, int id_creator, String title_post, String contenu_post , String type_post, String image_post, String makedate_post, String country) {
         this.id_post = id_post;
         this.likes_post = 0;
         this.id_creator = id_creator;
-        this.Title_post = title_post;
-        this.Description_post = description_post;
-        this.Type_post = type_post;
+        this.title_post = title_post;
+        this.contenu_post  = contenu_post ;
+        this.type_post = type_post;
         this.Image_post = image_post;
-        this.Dateposted = dateposted;
+        this.makedate_post = makedate_post;
         this.country = country;
     }
 
-    public post(int likes_post, int id_creator, String title_post, String description_post, String type_post, String image_post, String dateposted, String country) {
+    public post(int likes_post, int id_creator, String title_post, String contenu_post , String type_post, String image_post, String makedate_post, String country) {
         this.likes_post = 0;
         this.id_creator = id_creator;
-        this.Title_post = title_post;
-        this.Description_post = description_post;
-        this.Type_post = type_post;
+        this.title_post = title_post;
+        this.contenu_post  = contenu_post ;
+        this.type_post = type_post;
         this.Image_post = image_post;
-        this.Dateposted = dateposted;
+        this.makedate_post = makedate_post;
         this.country = country;
     }
 
-    public post( String title_post,String type_post, String description_post, String image_post) {
+    public post( String title_post,String type_post, String contenu_post , String image_post) {
         //this.likes_post = 0;
         //this.id_creator = id_creator;
-        this.Title_post = title_post;
-        this.Description_post = description_post;
-        this.Type_post = type_post;
+        this.title_post = title_post;
+        this.contenu_post  = contenu_post ;
+        this.type_post = type_post;
         this.Image_post = image_post;
-       // this.Dateposted = dateposted;
+       // this.makedate_post = makedate_post;
         //this.country = country;
     }
 
-    public post(int id_creator, String title_post, String description_post, String type_post, String image_post, String dateposted) {
+    public post(int id_creator, String title_post, String contenu_post , String type_post, String image_post, String makedate_post) {
         this.id_creator = id_creator;
-        this.Title_post = title_post;
-        this.Description_post = description_post;
-        this.Type_post = type_post;
+        this.title_post = title_post;
+        this.contenu_post  = contenu_post ;
+        this.type_post = type_post;
         this.Image_post = image_post;
-        this.Dateposted = dateposted;
+        this.makedate_post = makedate_post;
        // this.country = country;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getId_post() {
         return id_post;
@@ -83,27 +97,27 @@ public class post {
     }
 
     public String getTitle_post() {
-        return Title_post;
+        return title_post;
     }
 
     public void setTitle_post(String title_post) {
-        Title_post = title_post;
+        this.title_post = title_post;
     }
 
-    public String getDescription_post() {
-        return Description_post;
+    public String getContenu_post () {
+        return contenu_post ;
     }
 
-    public void setDescription_post(String description_post) {
-        Description_post = description_post;
+    public void setContenu_post (String contenu_post ) {
+        this.contenu_post  = contenu_post ;
     }
 
     public String getType_post() {
-        return Type_post;
+        return type_post;
     }
 
     public void setType_post(String type_post) {
-        Type_post = type_post;
+        this.type_post = type_post;
     }
 
     public String getImage_post() {
@@ -114,12 +128,12 @@ public class post {
         Image_post = image_post;
     }
 
-    public String getDateposted() {
-        return Dateposted;
+    public String getMakedate_post() {
+        return makedate_post;
     }
 
-    public void setDateposted(String dateposted) {
-        Dateposted = dateposted;
+    public void setMakedate_post(String makedate_post) {
+        this.makedate_post = makedate_post;
     }
 
     public String getCountry() {
@@ -133,15 +147,15 @@ public class post {
 
     @Override
     public String toString() {
-        return "post{" +
-                "id_post=" + id_post +
+        return "post{" +"id= " + id +
+                ", id_post=" + id_post +
                 ", likes_post=" + likes_post +
                 ", id_creator=" + id_creator +
-                ", Title_post='" + Title_post + '\'' +
-                ", Description_post='" + Description_post + '\'' +
-                ", Type_post='" + Type_post + '\'' +
+                ", title_post='" + title_post + '\'' +
+                ", contenu_post ='" + contenu_post  + '\'' +
+                ", type_post='" + type_post + '\'' +
                 ", Image_post='" + Image_post + '\'' +
-                ", Dateposted='" + Dateposted + '\'' +
+                ", makedate_post='" + makedate_post + '\'' +
                 ", country='" + country + '\'' +
                 '}';
     }

@@ -25,11 +25,11 @@ public class serviceComment {
         try {
 
 
-            String req = "INSERT INTO comment (id_creatorcom,id_post,creationdate,comment) VALUES (?, ?,CURDATE(), ?)";
+            String req = "INSERT INTO comment (id_comment,name_comment,mail_comment,id_creatorcom,id_post_id,datecreation_comment,contenu_comment) VALUES (1,'name','mail',?, ?,CURDATE(), ?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, t.getId_creatorcom());
-            ps.setInt(2, t.getId_post());
-            ps.setString(3, t.getComment());
+            ps.setInt(2, t.getId_post_id());
+            ps.setString(3, t.getContenu_comment());
 
 
             int rowsInserted = ps.executeUpdate();
@@ -46,11 +46,11 @@ public class serviceComment {
     public void modifier(comment com) {
         try {
 
-            String req = "update comment set comment=? where id_comment= ?";
+            String req = "update comment set contenu_comment=? where id= ?";
             PreparedStatement ps = cnx.prepareStatement(req);
 
-            ps.setString(1, com.getComment());
-            ps.setInt(2, (int) com.getId_comment());
+            ps.setString(1, com.getContenu_comment());
+            ps.setInt(2, (int) com.getId());
             ps.executeUpdate();
             System.out.println("Comment modifiée");
         } catch (SQLException ex) {
@@ -63,7 +63,7 @@ public class serviceComment {
         try
         {
             Statement st = cnx.createStatement();
-            String req = "DELETE FROM comment WHERE id_comment = "+id+"";
+            String req = "DELETE FROM comment WHERE id = "+id+"";
             st.executeUpdate(req);
             System.out.println("Comment supprimer avec succès...");
         } catch (SQLException ex) {
@@ -80,11 +80,11 @@ public class serviceComment {
 
             while (rs.next()) {
                 comment p = new comment();
-                //p.setId_comment(rs.getInt(1));
+                //p.setid(rs.getInt(1));
 
-                p.setComment(rs.getString("comment"));
-                p.setCreationdate(rs.getString("creationdate"));
-                p.setId_post(idp);
+                p.setContenu_comment(rs.getString("comment"));
+                p.setDatecreation_comment(rs.getString("datecreation_comment"));
+                p.setId_post_id(idp);
                 comments.add(p);
             }
 
@@ -97,17 +97,17 @@ public class serviceComment {
     public List<comment> affichersingle(int idp) {
         List<comment> comments = new ArrayList<>();
         try {
-            String req = "SELECT * FROM comment WHERE Id_post = " + idp;
+            String req = "SELECT * FROM comment WHERE id_post_id = " + idp;
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
 
             while (rs.next()) {
                 comment p = new comment();
-                //p.setId_comment(rs.getInt(1));
+                //p.setid(rs.getInt(1));
 
-                p.setComment(rs.getString("comment"));
-                p.setCreationdate(rs.getString("creationdate"));
-                p.setId_post(idp);
+                p.setContenu_comment(rs.getString("contenu_comment"));
+                p.setDatecreation_comment(rs.getString("datecreation_comment"));
+                p.setId_post_id(idp);
                 comments.add(p);
             }
 

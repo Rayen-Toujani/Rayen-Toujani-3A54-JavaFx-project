@@ -9,7 +9,7 @@ public class DataSource {
     private final String USERNAME = "root";
 
     private final String PASSWORD = "";
-    private final String URL ="jdbc:mysql://127.0.0.1:3306/pijavatest";
+    private final String URL ="jdbc:mysql://127.0.0.1:3306/sympi3";
 
 
     private DataSource(){

@@ -31,12 +31,12 @@ private     Connection cnx = DataSource.getInstance().getConnection();
             // Get the current country
             String country = getCurrentCountry();
 
-            String req = "INSERT INTO post (Id_creator, Title_post, Type_post, Description_post, Image_post, Dateposted, Country, likes_post) VALUES (?, ?, ?, ?, ?, CURDATE(), ?, 0)";
+            String req = "INSERT INTO post (id_post,Id_creator, title_post, type_post, contenu_post, Image_post, makedate_post, Country, likes_post) VALUES (1,?, ?, ?, ?, ?, CURDATE(), ?, 0)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, t.getId_creator());
             ps.setString(2, t.getTitle_post());
             ps.setString(3, t.getType_post());
-            ps.setString(4, t.getDescription_post());
+            ps.setString(4, t.getContenu_post());
             ps.setString(5, t.getImage_post());
             ps.setString(6, country);
 
@@ -116,11 +116,11 @@ private     Connection cnx = DataSource.getInstance().getConnection();
     }
     public void modifier(post t) {
         try {
-            String req = "UPDATE post SET Title_post=?, Type_post=?, Description_post=?, Image_post=? WHERE id_post=?";
+            String req = "UPDATE post SET title_post=?, type_post=?, contenu_post=?, Image_post=? WHERE id_post=?";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, t.getTitle_post());
             ps.setString(2, t.getType_post());
-            ps.setString(3, t.getDescription_post());
+            ps.setString(3, t.getContenu_post());
             ps.setString(4, t.getImage_post());
             ps.setInt(5, t.getId_post()); // Assuming id_post is of type int in the database
             ps.executeUpdate();
@@ -132,11 +132,11 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
 
 
-    public void Supprimer(int id) {
+    public void Supprimer(int id_post) {
         try
         {
             Statement st = cnx.createStatement();
-            String req = "DELETE FROM post WHERE id_post = "+id+"";
+            String req = "DELETE FROM post WHERE id = "+id_post+"";
             st.executeUpdate(req);
             System.out.println("post supprimer avec succès...");
         } catch (SQLException ex) {
@@ -154,12 +154,12 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
             while (rs.next()) {
                 post p = new post();
-                p.setId_post(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setId_post(rs.getInt("id_post"));
-                p.setDescription_post(rs.getString("description_post"));
+                p.setContenu_post(rs.getString("contenu_post"));
                 p.setTitle_post(rs.getString("title_post"));
                 p.setType_post(rs.getString("type_post"));
-                p.setDateposted(rs.getString("dateposted"));
+                p.setMakedate_post(rs.getString("makedate_post"));
                 p.setImage_post(rs.getString("image_post"));
                 p.setLikes_post(rs.getInt("likes_post"));
                 p.setId_creator(rs.getInt("id_creator"));
@@ -183,12 +183,12 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
             while (rs.next()) {
                 post p = new post();
-                p.setId_post(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setId_post(rs.getInt("id_post"));
-                p.setDescription_post(rs.getString("description_post"));
+                p.setContenu_post(rs.getString("contenu_post"));
                 p.setTitle_post(rs.getString("title_post"));
                 p.setType_post(rs.getString("type_post"));
-                p.setDateposted(rs.getString("dateposted"));
+                p.setMakedate_post(rs.getString("makedate_post"));
                 p.setImage_post(rs.getString("image_post"));
                 p.setLikes_post(rs.getInt("likes_post"));
                 p.setId_creator(rs.getInt("id_creator"));
@@ -300,12 +300,12 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
     private post populatePostFromResultSet(ResultSet rs) throws SQLException {
         post p = new post();
-        p.setId_post(rs.getInt(1));
+        p.setId(rs.getInt(1));
         p.setId_post(rs.getInt("id_post"));
-        p.setDescription_post(rs.getString("description_post"));
+        p.setContenu_post(rs.getString("contenu_post"));
         p.setTitle_post(rs.getString("title_post"));
         p.setType_post(rs.getString("type_post"));
-        p.setDateposted(rs.getString("dateposted"));
+        p.setMakedate_post(rs.getString("makedate_post"));
         p.setImage_post(rs.getString("image_post"));
         p.setLikes_post(rs.getInt("likes_post"));
         p.setId_creator(rs.getInt("id_creator"));
@@ -425,7 +425,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
     public List<post> getPostsOrderByDateDescending(int offset, int pageSize) {
         List<post> orderedPosts = new ArrayList<>();
-        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY Dateposted DESC LIMIT ? OFFSET ?")) {
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY makedate_post DESC LIMIT ? OFFSET ?")) {
             ps.setInt(1, pageSize);
             ps.setInt(2, offset);
             try (ResultSet rs = ps.executeQuery()) {
@@ -443,7 +443,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
     public List<post> getPostsOrderByDateAscending(int offset, int pageSize) {
         List<post> orderedPosts = new ArrayList<>();
-        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY Dateposted ASC LIMIT ? OFFSET ?")) {
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post ORDER BY makedate_post ASC LIMIT ? OFFSET ?")) {
             ps.setInt(1, pageSize);
             ps.setInt(2, offset);
             try (ResultSet rs = ps.executeQuery()) {
@@ -464,7 +464,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         List<post> matchingPosts = new ArrayList<>();
 
         // Create the SQL query to search for posts by keyword in title and description
-        String sqlQuery = "SELECT * FROM post WHERE LOWER(title_post) LIKE ? OR LOWER(description_post) LIKE ?";
+        String sqlQuery = "SELECT * FROM post WHERE LOWER(title_post) LIKE ? OR LOWER(contenu_post) LIKE ?";
 
         try (PreparedStatement ps = cnx.prepareStatement(sqlQuery)) {
             // Set the parameters for the prepared statement
@@ -479,13 +479,15 @@ private     Connection cnx = DataSource.getInstance().getConnection();
             while (rs.next()) {
                 // Create a new post object from the current row in the result set
                 post p = new post();
+                p.setId(rs.getInt(1));
                 p.setId_post(rs.getInt("id_post"));
+                p.setContenu_post(rs.getString("contenu_post"));
                 p.setTitle_post(rs.getString("title_post"));
-                p.setDescription_post(rs.getString("description_post"));
                 p.setType_post(rs.getString("type_post"));
+                p.setMakedate_post(rs.getString("makedate_post"));
                 p.setImage_post(rs.getString("image_post"));
                 p.setLikes_post(rs.getInt("likes_post"));
-                p.setDateposted(rs.getString("Dateposted"));
+                p.setId_creator(rs.getInt("id_creator"));
                 p.setCountry(rs.getString("country"));
 
                 // Add the post to the list of matching posts
@@ -506,12 +508,12 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
         // Add keyword filter
         if (keyword != null && !keyword.isEmpty()) {
-            sqlQuery.append(" AND (LOWER(title_post) LIKE ? OR LOWER(description_post) LIKE ?)");
+            sqlQuery.append(" AND (LOWER(title_post) LIKE ? OR LOWER(contenu_post) LIKE ?)");
         }
 
         // Add date range filter
         if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
-            sqlQuery.append(" AND Dateposted BETWEEN ? AND ?");
+            sqlQuery.append(" AND makedate_post BETWEEN ? AND ?");
         }
 
         // Add user filter
@@ -527,7 +529,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         // Add sorting criteria
         switch (sortBy != null ? sortBy.toLowerCase() : "") {
             case "date":
-                sqlQuery.append(" ORDER BY Dateposted DESC");
+                sqlQuery.append(" ORDER BY makedate_post DESC");
                 break;
             case "likes":
                 sqlQuery.append(" ORDER BY likes_post DESC");
@@ -536,7 +538,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
                 sqlQuery.append(" ORDER BY title_post ASC");
                 break;
             default:
-                sqlQuery.append(" ORDER BY Dateposted DESC");
+                sqlQuery.append(" ORDER BY makedate_post DESC");
                 break;
         }
 
@@ -568,12 +570,12 @@ private     Connection cnx = DataSource.getInstance().getConnection();
                 while (rs.next()) {
                     post p = new post();
                     // Populate the post object from the result set
-                    p.setId_post(rs.getInt(1));
+                    p.setId(rs.getInt(1));
                     p.setId_post(rs.getInt("id_post"));
-                    p.setDescription_post(rs.getString("description_post"));
+                    p.setContenu_post(rs.getString("contenu_post"));
                     p.setTitle_post(rs.getString("title_post"));
                     p.setType_post(rs.getString("type_post"));
-                    p.setDateposted(rs.getString("dateposted"));
+                    p.setMakedate_post(rs.getString("makedate_post"));
                     p.setImage_post(rs.getString("image_post"));
                     p.setLikes_post(rs.getInt("likes_post"));
                     p.setId_creator(rs.getInt("id_creator"));
