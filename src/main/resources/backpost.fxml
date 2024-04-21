@@ -230,7 +230,9 @@
                                                    </children>
                                                 </AnchorPane>
 
-                                                      <PieChart fx:id="countryPieChart" prefHeight="421.0" prefWidth="1690.0" BorderPane.alignment="BOTTOM_CENTER" />
+
+                                                <PieChart fx:id="countryPieChart" prefHeight="421.0" prefWidth="1690.0" BorderPane.alignment="BOTTOM_CENTER" />
+
 
 
                                              </children>
