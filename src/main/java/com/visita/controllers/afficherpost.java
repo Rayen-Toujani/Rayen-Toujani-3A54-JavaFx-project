@@ -214,8 +214,8 @@ public class afficherpost {
     private void loadPosts(int page) {
         // Calculate offset based on page number and page size
         int offset = (page - 1) * pageSize;
-        // Load posts for the specified page
-        List<post> posts = sp.getPostsForPage(offset, pageSize);
+        // Load validated posts for the specified page
+        List<post> posts = sp.getValidatedPostsForPage(offset, pageSize);
         // Display the loaded posts
         displayPosts(posts);
     }
@@ -644,7 +644,7 @@ public class afficherpost {
     @FXML
     private void showUserPosts() {
         // Example: Load posts by the logged-in user from a database or other source
-        List<post> userPosts = sp.afficheruserpost(loggedInUserId); // Replace getPostsByUser with your actual method
+        List<post> userPosts = sp.getValidatedUserPosts(loggedInUserId); // Replace getPostsByUser with your actual method
 
 
         // Clear postContainer to remove previous post details

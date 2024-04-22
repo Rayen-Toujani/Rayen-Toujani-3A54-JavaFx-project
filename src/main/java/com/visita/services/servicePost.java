@@ -195,6 +195,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
                 p.setLikes_post(rs.getInt("likes_post"));
                 p.setId_creator(rs.getInt("id_creator"));
                 p.setCountry(rs.getString("country"));
+                p.setValidation_post(rs.getInt("validate_post"));
                 posts.add(p);
             }
             System.out.print(posts);
@@ -299,6 +300,41 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
         return totalCount;
     }
+
+
+    public List<post> getValidatedPostsForPage(int offset, int pageSize) {
+        List<post> posts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post WHERE validation_post = 1 LIMIT ? OFFSET ?")) {
+            ps.setInt(1, pageSize);
+            ps.setInt(2, offset);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    posts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching validated posts for page: " + ex.getMessage());
+        }
+        return posts;
+    }
+
+    public List<post> getValidatedUserPosts(int userId) {
+        List<post> posts = new ArrayList<>();
+        try (PreparedStatement ps = cnx.prepareStatement("SELECT * FROM post WHERE id_creator = ? AND validation_post = 1")) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    post p = populatePostFromResultSet(rs);
+                    posts.add(p);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching validated user posts: " + ex.getMessage());
+        }
+        return posts;
+    }
+
 
     private post populatePostFromResultSet(ResultSet rs) throws SQLException {
         post p = new post();
@@ -507,7 +543,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
 
     public List<post> searchAndFilterPosts(String keyword, String startDate, String endDate, String user, String location, String sortBy) {
         List<post> filteredPosts = new ArrayList<>();
-        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM post WHERE 1=1");
+        StringBuilder sqlQuery = new StringBuilder("SELECT * FROM post WHERE validation_post = 1");
 
         // Add keyword filter
         if (keyword != null && !keyword.isEmpty()) {
