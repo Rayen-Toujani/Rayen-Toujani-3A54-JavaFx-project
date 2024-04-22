@@ -46,6 +46,8 @@ public class Backpost {
     @FXML
     private TableColumn<post, String> countryColumn;
     @FXML
+    private TableColumn<post, Void> validateColumn;
+    @FXML
     private TableColumn<post, String> imageColumn;
 
     @FXML
@@ -141,6 +143,26 @@ public class Backpost {
                     setGraphic(null);
                 } else {
                     setGraphic(deleteButton);
+                }
+            }
+        });
+        validateColumn.setCellFactory(column -> new TableCell<post, Void>() {
+            private final Button validateButton = new Button("Validate");
+
+            {
+                validateButton.setOnAction(event -> {
+                    post currentPost = getTableView().getItems().get(getIndex());
+                    validatePost(currentPost);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(validateButton);
                 }
             }
         });
@@ -250,6 +272,16 @@ public class Backpost {
             sc.Supprimer(commentToDelete.getId());
 
             commetList.remove(commentToDelete);
+
+            //System.out.println(postToDelete.getId() + postToDelete.getType_post());
+            // Add code here to handle additional delete logic, such as removing the post from the database
+        }
+        private void validatePost(post postToValidate) {
+
+
+            sp.validatePost(postToValidate.getId_post());
+
+
 
             //System.out.println(postToDelete.getId() + postToDelete.getType_post());
             // Add code here to handle additional delete logic, such as removing the post from the database

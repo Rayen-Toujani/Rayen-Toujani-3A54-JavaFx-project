@@ -114,6 +114,7 @@
                            <Button fx:id="uploadImageButton" layoutX="377.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleUploadImageClick" styleClass="profile_button" stylesheets="@style.css" text="Upload Image" />
                            <TextArea fx:id="Post_Description" layoutX="21.0" layoutY="440.0" prefHeight="476.0" prefWidth="1439.0" promptText="Post Content" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="custom-textarea" stylesheets="@addpostStyle.css" />
                            <TextField fx:id="Post_Title" layoutX="15.0" layoutY="52.0" prefHeight="170.0" prefWidth="539.0" promptText="Post Title" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="custom-textfield" stylesheets="@addpostStyle.css" />
+                           <TextField fx:id="Phone_Number" layoutX="731.0" layoutY="147.0" prefHeight="65.0" prefWidth="539.0" promptText="Phone Number" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="custom-textfield" stylesheets="@addpostStyle.css" />
                            <Label alignment="CENTER" layoutX="15.0" layoutY="15.0" minWidth="60.0" prefWidth="-1.0" stylesheets="@style.css" text="Submit a blog post :" textAlignment="CENTER" wrapText="false">
                               <font>
                                  <Font name="Impact" size="30.0" fx:id="x11" />

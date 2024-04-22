@@ -214,6 +214,7 @@
                                                             <TableColumn fx:id="countryColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Country" />
                                                             <TableColumn fx:id="descriptionColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Description" />
                                                             <TableColumn fx:id="deleteColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Delete" />
+                                                            <TableColumn fx:id="validateColumn" prefWidth="455.0" style="-fx-alignment: center;" text="Validate" />
                                                          </columns>
                                                       </TableView>
 

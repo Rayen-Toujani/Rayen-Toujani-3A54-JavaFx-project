@@ -31,7 +31,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
             // Get the current country
             String country = getCurrentCountry();
 
-            String req = "INSERT INTO post (id_post,Id_creator, title_post, type_post, contenu_post, Image_post, makedate_post, Country, likes_post) VALUES (1,?, ?, ?, ?, ?, CURDATE(), ?, 0)";
+            String req = "INSERT INTO post (id_post,Id_creator, title_post, type_post, contenu_post, Image_post, makedate_post, Country, likes_post,phonenumber,validation_post) VALUES (1,?, ?, ?, ?, ?, CURDATE(), ?, 0,?,0)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, t.getId_creator());
             ps.setString(2, t.getTitle_post());
@@ -39,6 +39,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
             ps.setString(4, t.getContenu_post());
             ps.setString(5, t.getImage_post());
             ps.setString(6, country);
+            ps.setInt(7, t.getPhonenumber());
 
             int rowsInserted = ps.executeUpdate();
             if (rowsInserted > 0) {
@@ -164,6 +165,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
                 p.setLikes_post(rs.getInt("likes_post"));
                 p.setId_creator(rs.getInt("id_creator"));
                 p.setCountry(rs.getString("country"));
+                p.setValidation_post(rs.getInt("validation_post"));
                 posts.add(p);
             }
             System.out.print(posts);
@@ -310,6 +312,7 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         p.setLikes_post(rs.getInt("likes_post"));
         p.setId_creator(rs.getInt("id_creator"));
         p.setCountry(rs.getString("country"));
+        p.setValidation_post(rs.getInt("validation_post"));
         // Populate other attributes as needed
         return p;
     }
@@ -590,6 +593,30 @@ private     Connection cnx = DataSource.getInstance().getConnection();
         }
 
         return filteredPosts;
+    }
+
+
+
+
+    public void validatePost(int id_post) {
+        // Define the query to update the validation_post column
+        String query = "UPDATE post SET validation_post = 1 WHERE id = ?";
+        try (PreparedStatement ps = cnx.prepareStatement(query)) {
+            // Set the ID of the post to validate
+            ps.setInt(1, id_post);
+
+            // Execute the update
+            int rowsAffected = ps.executeUpdate();
+
+            // Check if any rows were affected
+            if (rowsAffected > 0) {
+                System.out.println("Successfully validated post with ID: " + id_post);
+            } else {
+                System.out.println("No post found with ID: " + id_post);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error validating post: " + ex.getMessage());
+        }
     }
 
 

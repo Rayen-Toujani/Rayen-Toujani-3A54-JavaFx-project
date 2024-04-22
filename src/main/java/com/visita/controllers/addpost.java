@@ -26,6 +26,8 @@ public class addpost {
     @FXML
     private TextField Post_Title;
     @FXML
+    private TextField Phone_Number;
+    @FXML
     private TextArea Post_Description;
     @FXML
     private ImageView uploadedImageView;
@@ -63,6 +65,22 @@ public class addpost {
     }
 
 
+/*
+    public void convertTextFieldToInt() {
+        // Get the text from the TextField
+        String text = Phone_Number.getText();
+
+        try {
+            // Convert the text to an integer
+            int phoneNumber = Integer.parseInt(text);
+
+            // Now you can use the phoneNumber integer in your application
+            System.out.println("Converted phone number: " + phoneNumber);
+        } catch (NumberFormatException e) {
+            // Handle the exception if the text is not a valid integer
+            System.out.println("Invalid input: Not a valid integer");
+        }
+    }*/
 
 
 
@@ -71,8 +89,21 @@ public class addpost {
         try {
             if (validateInput()) {
 
+                String phoneNumberText = Phone_Number.getText();
 
-                ps.ajouter(new post(777, Post_Title.getText(), Post_Description.getText(), typepost, imagePath,"aaa"));
+
+
+                try {
+                    // Convert the text to an integer
+                    int phoneNumber = Integer.parseInt(phoneNumberText);
+
+
+                ps.ajouter(new post(Post_Title.getText(), typepost, Post_Description.getText(), imagePath,phoneNumber,0));
+
+                } catch (NumberFormatException e) {
+                    // Handle the exception if the text is not a valid integer
+                    System.out.println("Invalid input: Phone number must be a valid integer");
+                }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");

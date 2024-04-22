@@ -13,6 +13,10 @@ public class post {
 
     private String title_post,contenu_post,type_post,Image_post;
 
+    private int    phonenumber,validation_post;
+
+
+
     private String makedate_post , country;
 
 
@@ -29,6 +33,18 @@ public class post {
         this.Image_post = image_post;
         this.makedate_post = makedate_post;
         this.country = country;
+    }public post(int id_post, int likes_post, int id_creator, String title_post, String contenu_post , String type_post, String image_post, String makedate_post, String country,int phonenumber,int validation_post) {
+        this.id_post = id_post;
+        this.likes_post = 0;
+        this.id_creator = id_creator;
+        this.title_post = title_post;
+        this.contenu_post  = contenu_post ;
+        this.type_post = type_post;
+        this.Image_post = image_post;
+        this.makedate_post = makedate_post;
+        this.country = country;
+        this.phonenumber = phonenumber;
+        this.validation_post = validation_post;
     }
 
     public post(int likes_post, int id_creator, String title_post, String contenu_post , String type_post, String image_post, String makedate_post, String country) {
@@ -49,6 +65,19 @@ public class post {
         this.contenu_post  = contenu_post ;
         this.type_post = type_post;
         this.Image_post = image_post;
+       // this.makedate_post = makedate_post;
+        //this.country = country;
+    }
+
+    public post(String title_post, String type_post, String contenu_post , String image_post, int phonenumber, int validation_post ) {
+        //this.likes_post = 0;
+        //this.id_creator = id_creator;
+        this.title_post = title_post;
+        this.contenu_post  = contenu_post ;
+        this.type_post = type_post;
+        this.Image_post = image_post;
+        this.phonenumber = phonenumber;
+        this.validation_post = validation_post;
        // this.makedate_post = makedate_post;
         //this.country = country;
     }
@@ -78,6 +107,14 @@ public class post {
 
     public void setId_post(int id_post) {
         this.id_post = id_post;
+    }
+
+    public int getValidation_post() {
+        return validation_post;
+    }
+
+    public void setValidation_post(int validation_post) {
+        this.validation_post = validation_post;
     }
 
     public int getLikes_post() {
@@ -128,6 +165,14 @@ public class post {
         Image_post = image_post;
     }
 
+    public int getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(int phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
     public String getMakedate_post() {
         return makedate_post;
     }
@@ -157,6 +202,7 @@ public class post {
                 ", Image_post='" + Image_post + '\'' +
                 ", makedate_post='" + makedate_post + '\'' +
                 ", country='" + country + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
                 '}';
     }
 
