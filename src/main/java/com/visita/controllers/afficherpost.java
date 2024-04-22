@@ -85,6 +85,12 @@ public class afficherpost {
     private ToggleButton modeToggleButton;
     @FXML
     private ImageView img_mode;
+    @FXML
+    private TextArea commentInput;
+
+    @FXML
+    private Label commentErrorLabel;
+
 
 
 
@@ -131,6 +137,8 @@ public class afficherpost {
 
 
 
+
+
     public void initialize() {
 
         modeToggleButton.getStyleClass().add("toggle-switch");
@@ -167,9 +175,12 @@ public class afficherpost {
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> searchPosts());
 
-
+        commentInput.textProperty().addListener((observable, oldValue, newValue) -> validateCommentInput(newValue));
 
     }
+
+
+
 
 
 
@@ -364,6 +375,8 @@ public class afficherpost {
 
 
     private void showPostDetails(post p) {
+
+        commentInput.setVisible(true);
         // Clear postContainer to remove previous post details
         System.out.println(p.getId());
         postContainer.getChildren().clear();
@@ -404,19 +417,35 @@ public class afficherpost {
 
         // Input area for adding new comments
         // Replace this with your desired input area implementation
-        TextArea commentInput = new TextArea();
+
         Button addCommentButton = new Button("Add Comment");
+        commentErrorLabel = new Label(); // Initialize the error label
+        commentErrorLabel.setVisible(false); // Hide the error label initially
         addCommentButton.getStyleClass().add("login_button");
         addCommentButton.setOnAction(event -> {
             String newCommentText = commentInput.getText();
-            // Filter the new comment
-            newCommentText = CommentFilter.filterComment(newCommentText);
-            // Add new comment logic here
-            sc.ajouter(new comment(1,p.getId(),"azea",newCommentText));
-            showPostDetails(p);
+            int minLength = 15; // Define the minimum comment length
+
+            if (newCommentText.length() >= minLength) {
+                // Comment length is valid
+                commentErrorLabel.setVisible(false); // Hide the error label
+                // Filter the new comment
+                newCommentText = CommentFilter.filterComment(newCommentText);
+                // Add new comment logic here
+                sc.ajouter(new comment(loggedInUserId, p.getId(), "user_name", newCommentText));
+                showPostDetails(p);
+            } else {
+                // Comment length is invalid
+                commentErrorLabel.setText("Comment must be at least " + minLength + " characters long.");
+                commentErrorLabel.setVisible(true);
+                commentErrorLabel.setLayoutX(commentInput.getLayoutX());
+                commentErrorLabel.setLayoutY(commentInput.getLayoutY() - 20);
+                commentErrorLabel.setStyle("-fx-font-size: 14; -fx-text-fill: red;");
+                commentInput.setStyle("-fx-border-color: red; -fx-border-radius: 5px; -fx-border-width: 1px;");
+            }
         });
 
-        VBox addCommentBox = new VBox(commentInput, addCommentButton);
+        VBox addCommentBox = new VBox(commentInput,commentErrorLabel, addCommentButton);
 
         // Like Button
         Button likeButton = new Button();
@@ -521,7 +550,7 @@ public class afficherpost {
 
         // Input area for adding new comments
         // Replace this with your desired input area implementation
-        TextArea commentInput = new TextArea();
+       // TextArea commentInput = new TextArea();
         Button addCommentButton = new Button("Add Comment");
         addCommentButton.getStyleClass().add("login_button");
         addCommentButton.setOnAction(event -> {
@@ -703,6 +732,26 @@ public class afficherpost {
 
         }
     }
+
+    private void validateCommentInput(String newValue) {
+        int minLength = 15; // Define the minimum comment length
+
+        if (newValue.length() >= minLength) {
+            // If comment length is valid, hide the error label and style `commentInput` green
+            commentErrorLabel.setVisible(false);
+            commentInput.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 1px;");
+        } else {
+            // If comment length is invalid, show the error label and style `commentInput` red
+            commentErrorLabel.setText("Comment must be at least " + minLength + " characters long.");
+            commentErrorLabel.setVisible(true);
+            commentErrorLabel.setLayoutX(commentInput.getLayoutX());
+            commentErrorLabel.setLayoutY(commentInput.getLayoutY() - 20);
+            commentErrorLabel.setStyle("-fx-font-size: 20; -fx-text-fill: red;");
+            commentInput.setStyle("-fx-border-color: red; -fx-border-radius: 5px; -fx-border-width: 5px;");
+        }
+    }
+
+
 
 
 

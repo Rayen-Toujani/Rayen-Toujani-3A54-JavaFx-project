@@ -112,15 +112,26 @@
             
                                              <ImageView fx:id="uploadedImageView" fitHeight="255.0" fitWidth="538.0" layoutX="573.0" layoutY="179.0" />
                            <Button fx:id="uploadImageButton" layoutX="377.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleUploadImageClick" styleClass="profile_button" stylesheets="@style.css" text="Upload Image" />
-                           <TextArea fx:id="Post_Description" layoutX="21.0" layoutY="440.0" prefHeight="476.0" prefWidth="1439.0" promptText="Post Content" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="custom-textarea" stylesheets="@addpostStyle.css" />
-                           <TextField fx:id="Post_Title" layoutX="15.0" layoutY="52.0" prefHeight="170.0" prefWidth="539.0" promptText="Post Title" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="custom-textfield" stylesheets="@addpostStyle.css" />
-                           <TextField fx:id="Phone_Number" layoutX="731.0" layoutY="147.0" prefHeight="65.0" prefWidth="539.0" promptText="Phone Number" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="custom-textfield" stylesheets="@addpostStyle.css" />
+                           <TextArea fx:id="Post_Description" layoutX="28.0" layoutY="440.0" prefHeight="476.0" prefWidth="1439.0" promptText="Post Content" stylesheets="@addpostStyle.css">
+                              <font>
+                                 <Font size="30.0" />
+                              </font></TextArea>
+                           <TextField fx:id="Post_Title" layoutX="15.0" layoutY="86.0" prefHeight="170.0" prefWidth="539.0" promptText="Post Title" stylesheets="@addpostStyle.css">
+                              <font>
+                                 <Font size="25.0" />
+                              </font></TextField>
+                           <TextField fx:id="Phone_Number" layoutX="611.0" layoutY="191.0" prefHeight="65.0" prefWidth="540.0" promptText="Phone Number" stylesheets="@addpostStyle.css">
+                              <font>
+                                 <Font size="20.0" />
+                              </font></TextField>
+                           <Label fx:id="errorLabel" style="-fx-text-fill: red;" text="" visible="false" />
+
                            <Label alignment="CENTER" layoutX="15.0" layoutY="15.0" minWidth="60.0" prefWidth="-1.0" stylesheets="@style.css" text="Submit a blog post :" textAlignment="CENTER" wrapText="false">
                               <font>
                                  <Font name="Impact" size="30.0" fx:id="x11" />
                               </font>
                            </Label>
-                           <ChoiceBox fx:id="Typepostchoice" layoutX="923.0" layoutY="102.0" prefHeight="25.0" prefWidth="366.0" style="-fx-background-radius: 50;" styleClass="profile_button" stylesheets="@addpostStyle.css" />
+                           <ChoiceBox fx:id="Typepostchoice" layoutX="611.0" layoutY="103.0" prefHeight="35.0" prefWidth="542.0" style="-fx-background-radius: 50;" styleClass="profile_button" stylesheets="@addpostStyle.css" />
                         </children>
                      </AnchorPane>
                      <VBox prefHeight="1009.0" prefWidth="182.0" style="-fx-background-color: #ffffff;">

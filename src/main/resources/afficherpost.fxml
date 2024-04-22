@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TextArea?>
 <AnchorPane prefHeight="1007.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.visita.controllers.afficherpost">
    <BorderPane fx:id="parent" layoutY="-4.0" prefHeight="1000.0" prefWidth="1909.0" stylesheets="@style.css">
       <left>
@@ -120,6 +121,8 @@
                                                       <VBox fx:id="postContainer" alignment="CENTER" layoutX="57.0" layoutY="24.0" prefHeight="815.0" prefWidth="1338.0" spacing="10" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="primary-color">
                                                 <AnchorPane prefHeight="780.0" prefWidth="1338.0">
                                                    <children>
+                                                      <TextArea fx:id="commentInput" text="" visible="false"> </TextArea>
+                                                      <Label fx:id="errorLabel" style="-fx-text-fill: red;" text="" visible="false" />
                                                                 <!-- Add VBox to display comments -->
                                                                 <VBox fx:id="commentsContainer" layoutX="185.0" layoutY="20.0" prefHeight="803.0" prefWidth="1030.0" style="-fx-padding: 20;" />
                                                    </children>

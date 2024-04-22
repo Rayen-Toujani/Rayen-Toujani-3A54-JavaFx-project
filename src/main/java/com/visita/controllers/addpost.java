@@ -35,6 +35,10 @@ public class addpost {
     @FXML
     private ChoiceBox<String> Typepostchoice;
 
+    @FXML
+    private Label errorLabel;
+
+
     private String imagePath;
     private String typepost;
 
@@ -42,12 +46,76 @@ public class addpost {
 
 
     @FXML
-    public void initialize(){
-        ObservableList<String> items = FXCollections.observableArrayList("Medicine","Heart","Free counselling","Lab test","Equipments");
+    public void initialize() {
+        // Initialize the choice box and other components
+        ObservableList<String> items = FXCollections.observableArrayList("Medicine", "Heart", "Free counselling", "Lab test", "Equipments");
         Typepostchoice.setItems(items);
-        Typepostchoice.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> typepost=newValue));
+        Typepostchoice.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> typepost = newValue);
 
+        // Add listeners for input validation
+        Phone_Number.textProperty().addListener((observable, oldValue, newValue) -> validatePhoneNumber(newValue));
+        Post_Title.textProperty().addListener((observable, oldValue, newValue) -> validateTitle(newValue));
+        Post_Description.textProperty().addListener((observable, oldValue, newValue) -> validateDescription(newValue));
 
+        // Initialize the error label
+        errorLabel.setText("");  // Clear any previous error message
+    }
+
+    private void validatePhoneNumber(String newValue) {
+        // Check if the phone number is a valid integer and at least 8 digits long
+        if (newValue.matches("\\d{8,}")) {
+            // Input is valid; hide the error label
+            Phone_Number.setStyle("-fx-border-color: green; -fx-border-radius: 5px;-fx-border-width: 5px;");
+            errorLabel.setVisible(false);
+        } else {
+            // Input is invalid; show the error label
+            if (!newValue.matches("\\d*")) {
+                // Not a valid integer
+                errorLabel.setText("Phone number must be a valid integer.");
+            } else {
+                // Valid integer, but not enough digits
+                errorLabel.setText("Phone number must be at least 8 digits long.");
+            }
+            errorLabel.setVisible(true);
+            errorLabel.setLayoutX(630);
+            errorLabel.setLayoutY(165);
+            errorLabel.setStyle("-fx-font-size: 20; -fx-text-fill: red;");
+            Phone_Number.setStyle("-fx-border-color: red; -fx-border-radius: 5px; -fx-border-width: 5px;");
+        }
+    }
+
+    private void validateTitle(String newValue) {
+        // Check if the title is at least 20 characters long
+        if (newValue.length() >= 20) {
+            // Input is valid; hide the error label
+            errorLabel.setVisible(false);
+            Post_Title.setStyle("-fx-border-color: green; -fx-border-radius: 5px;-fx-border-width: 5px;");
+        } else {
+            // Input is invalid; show the error label
+            errorLabel.setText("Title must be at least 20 characters long.");
+            errorLabel.setVisible(true);
+            errorLabel.setLayoutX(50);
+            errorLabel.setLayoutY(60);
+            errorLabel.setStyle("-fx-font-size: 20; -fx-text-fill: red;");
+            Post_Title.setStyle("-fx-border-color: red; -fx-border-radius: 5px; -fx-border-width: 5px;");
+        }
+    }
+
+    private void validateDescription(String newValue) {
+        // Check if the description is at least 30 characters long
+        if (newValue.length() >= 30) {
+            // Input is valid; hide the error label
+            errorLabel.setVisible(false);
+            Post_Description.setStyle("-fx-border-color: green; -fx-border-radius: 5px; -fx-border-width: 5px;");
+        } else {
+            // Input is invalid; show the error label
+            errorLabel.setText("Description must be at least 30 characters long.");
+            errorLabel.setVisible(true);
+            errorLabel.setLayoutX(50);
+            errorLabel.setLayoutY(400);
+            errorLabel.setStyle("-fx-font-size: 20; -fx-text-fill: red;");
+            Post_Description.setStyle("-fx-border-color: red; -fx-border-radius: 5px; -fx-border-width: 5px;");
+        }
     }
 
     @FXML
@@ -88,30 +156,21 @@ public class addpost {
     void ajouterPost(ActionEvent event) {
         try {
             if (validateInput()) {
+                // Convert the phone number and proceed with adding the post
+                int phoneNumber = Integer.parseInt(Phone_Number.getText());
+                ps.ajouter(new post(Post_Title.getText(), typepost, Post_Description.getText(), imagePath, phoneNumber, 0));
 
-                String phoneNumberText = Phone_Number.getText();
-
-
-
-                try {
-                    // Convert the text to an integer
-                    int phoneNumber = Integer.parseInt(phoneNumberText);
-
-
-                ps.ajouter(new post(Post_Title.getText(), typepost, Post_Description.getText(), imagePath,phoneNumber,0));
-
-                } catch (NumberFormatException e) {
-                    // Handle the exception if the text is not a valid integer
-                    System.out.println("Invalid input: Phone number must be a valid integer");
-                }
-
+                // Show a success alert
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setContentText("Post added successfully");
                 alert.showAndWait();
+
+                // Navigate to the next page
                 navigateToNextPage();
             } else {
-                showAlert("Error", "Invalid input", "Please fill in all fields and upload an image.");
+                // Display an alert if the input is invalid
+                showAlert("Error", "Invalid input", "Please fix the errors and try again.");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
