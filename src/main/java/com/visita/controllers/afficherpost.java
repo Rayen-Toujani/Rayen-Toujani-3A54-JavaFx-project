@@ -509,7 +509,6 @@ public class afficherpost {
     private void showPostDetailsuser(post p) {
         // Clear postContainer to remove previous post details
 
-        System.out.println("\n" +p.getId());
 
         postContainer.getChildren().clear();
 

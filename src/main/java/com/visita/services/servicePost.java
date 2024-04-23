@@ -117,13 +117,13 @@ private     Connection cnx = DataSource.getInstance().getConnection();
     }
     public void modifier(post t) {
         try {
-            String req = "UPDATE post SET title_post=?, type_post=?, contenu_post=?, Image_post=? WHERE id_post=?";
+            String req = "UPDATE post SET title_post=?, type_post=?, contenu_post=?, Image_post=? WHERE id=?";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, t.getTitle_post());
             ps.setString(2, t.getType_post());
             ps.setString(3, t.getContenu_post());
             ps.setString(4, t.getImage_post());
-            ps.setInt(5, t.getId_post()); // Assuming id_post is of type int in the database
+            ps.setInt(5, t.getId()); // Assuming id_post is of type int in the database
             ps.executeUpdate();
             System.out.println("Post modifiée");
         } catch (SQLException ex) {
